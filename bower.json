@@ -1,0 +1,16 @@
+{
+    "name": "familytree.js",
+    "authors": [
+      "BALKAN App"
+    ],
+    "description": "FamilyTree JS is a simple, flexible and highly customizable origami JavaScript library.",
+    "main": "familytree.js",
+    "keywords": [
+      "tree",
+      "family tree",
+      "origami",
+      "hierarchy"
+    ],
+    "license": "MIT",
+    "homepage": "https://balkangraph.com"
+  }
