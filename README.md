@@ -1,28 +1,22 @@
 # ![Family Tree JS](https://balkangraph.com/content/img/icon-orgchart-js.png) Family Tree JS 
-Family Tree JS is a simple, flexible and highly customizable organization chart plugin for presenting the structure of your organization and the relationships in an elegant way.
+Build family tree app with BALKAN FamilyTreeJS JavaScript library. Family Tree also called a genealogy or a pedigree chart, is a chart representing family relationships in a conventional tree structure.
 
 ![Family Tree JS](https://cdn.balkan.app/FamilyTreeJS/FamilyTreeJS-tommy.webp)
 
 
-![Family Tree JS](https://cdn.balkan.app/FamilyTreeJS/FamilyTreeJS-hugo.webp)
-
-## [Demos](https://balkangraph.com/OrgChartJS/Demos/BasicUsage)  &nbsp;&nbsp;&nbsp;&nbsp;  [Docs](https://balkangraph.com/OrgChartJS/Docs/GettingStarted)  &nbsp;&nbsp;&nbsp;&nbsp;  [Download](https://balkangraph.com/OrgChartJS/Download) &nbsp;&nbsp;&nbsp;&nbsp;  [Support](https://balkangraph.com/OrgChartJS/Support)
+## [Demos](https://balkan.app/FamilyTreeJS/Demos/BasicUsage)  &nbsp;&nbsp;&nbsp;&nbsp;  [Docs](https://balkan.app/FamilyTreeJS/Docs/GettingStarted)  &nbsp;&nbsp;&nbsp;&nbsp;  [Download](https://balkan.app/FamilyTreeJS/Download) &nbsp;&nbsp;&nbsp;&nbsp;  [Support](https://balkan.app/FamilyTreeJS/Support)
 
 ## Features
 - Supports both local data and remote data (JSON)
 - Smooth expand/collapse effects
 - Align the chart in 8 orientations
-- Allows user to change orgchart structure by drag/drop nodes
 - Supports pan and zoom
 - Edit Form
 - Node Customization
 - Search
 - Scroll Bars
 - Lazy Loading
-- Mixed Hierarchy
 - Exporting
-- Assistant
-- Family Tree
 
 ## Installation
 Option 1 - [standalone build](https://balkan.app/FamilyTreeJS/Docs/GettingStarted)
@@ -37,27 +31,23 @@ Option 3 - Bower
 bower install familytree.js
 ```
 
-Option 4 - NuGet
-```
-Install-Package FamilyTreeJS 
-```
 
 ## Usage
 ```
-        <div id="tree"/>
-        <script>
- 
-        var chart = new OrgChart(document.getElementById("tree"), {
-            nodeBinding: {
-                field_0: "name"
-            },
-            nodes: [
-                { id: 1, name: "Amber McKenzie" },
-                { id: 2, pid: 1, name: "Ava Field" },
-                { id: 3, pid: 1, name: "Peter Stevens" }
-            ]
-        });
-        </script>
+    <script src="https://balkan.app/js/familytree.js"></script> 
+    <div id="tree"/>
+    <script>
+    var tree = new FamilyTree(document.getElementById("tree"), {
+        nodeBinding: {
+            field_0: "name"
+        },
+        nodes: [
+            { id: 1, pids: [2] },
+            { id: 2, pids: [1] },
+            { id: 3, mid: 1, fid: 2 }
+        ]
+    });
+    </script>
 ```
 
 ## 1 click to talk 2 us
