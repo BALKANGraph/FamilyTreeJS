@@ -1,4 +1,4 @@
-declare class FamilyTree {
+declare class FamilyTree extends FamilyTreeBase {
     nodes: { [key: string | number]: FamilyTree.node };
     isVisible: boolean;
 
@@ -8,37 +8,18 @@ declare class FamilyTree {
      */
     constructor(element: HTMLElement | string, options?: FamilyTree.options);
 
-    /**
-     * Updates the node data, redraws the chart and fires update event.
-     * @param data node data
-     * @param callback function called when the animation completes
-     * @param fireEvent if it set to true the update event is called
-     */
-    updateNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
     /**
      * Updates the node data
      * @param newData node data
      */
     update(newData: object): FamilyTree;
-    /**
-     * Removes specified node from nodes collection, redraws the chart and fires remove event.
-     * @param id identification number of the node
-     * @param callback called at the end of animation
-     * @param fireEvent indicates if the remove event will be called or not
-     */
-    removeNode(id: string | number, callback?: () => void, fireEvent?: boolean): void;
+
     /**
      * Removes specified node from nodes collection
      * @param id identification number of the node
      */
     remove(id: string | number): FamilyTree;
-    /**
-     * Adds new node to the nodes collection, redraws the chart and fires remove event
-     * @param data node data
-     * @param callback called at the end of animation
-     * @param fireEvent indicates if the add event will be called or not
-     */
-    addNode(data: object, callback?: () => void, fireEvent?: boolean): void;
     /**
      * Adds new node to the nodes collection
      * @param data node data
@@ -321,14 +302,6 @@ declare class FamilyTree {
 
 
     /**
-     * The on() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.     * 
-     * @category Event Listeners
-     * @param type A case-sensitive string representing the event type to listen for.
-     * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
-     */
-    on(type: "init" | "field" | "update" | "add" | "remove" | "renderbuttons" | "label" | "render-link" | "drag" | "drop" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args: unknown, args1: unknown, args2: unknown) => void | boolean): FamilyTree;
-
-    /**
      * The onField() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.
      *  ```typescript     
      * var chart = new FamilyTree('#tree', {});
@@ -374,106 +347,7 @@ declare class FamilyTree {
      */
     onInit(listener: () => void): FamilyTree;
     
-    /**
-     * Occurs when the node data has been updated by updateNode method.
-     *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onUpdateNode((args) => {
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */    
-    onUpdateNode(listener: (args: { 
-        /**
-         * old node data
-         */
-        oldData: object,
-        /**
-         * new node data
-         */ 
-        newData: object
-    }) => void): FamilyTree;
-    /**
-     * Occurs when a node has been removed by removeNode method. 
-     *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onRemoveNode((args) => {
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */        
-    onRemoveNode(listener: (args: { 
-        /**
-         * node id
-         */
-        id: number | string, 
-        /**
-         * parent ids and sub tree parents ids that needs to be updated on the server. For example if you remove a node that has children all chilren nodes will change their pid to the parent node id of the removed node.
-         */
-        newPidsAndStpidsForIds: {
-            newPidsForIds: {[key: string | number] : string | number},
-            newStpidsForIds: {[key: string | number] : string | number}
-    }}) => void): FamilyTree;
 
-    /**
-     * Occurs when a node has been added by addNode method.
-     *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onAddNode((args) => {     
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */  
-    onAddNode(listener: (args: { 
-        /**
-         * new added data node
-         */
-        data: object
-    }) => void): FamilyTree;
-    /**
-     * The onDrag event occurs when a node is dragged. *enableDragDrop* option has to be turned on.
-     *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onDrag(() => {
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */      
-    onDrag(listener: (args: { 
-        /**
-         * dragged node id
-         */
-        dragId: string | number
-    }) => void): FamilyTree;
-    /**
-     * The onDrop event occurs when a node is dropped. *enableDragDrop* option has to be turned on.
-     *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onDrop(() => {
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */          
-    onDrop(listener: (args: { 
-        /**
-         * dragged node id
-         */
-        dragId: string | number, 
-        /**
-         * dropped node id
-         */
-        dropId: string | number 
-    }) => void): FamilyTree;
 
     /**
      * The onRedraw event occurs when the chart is redrawed.
@@ -690,6 +564,10 @@ declare class FamilyTree {
     static childrenCount(chart: FamilyTree, node: FamilyTree.node, count?: number): number;
     static collapsedChildrenCount(chart: FamilyTree, node: FamilyTree.node, count?: number): number;
     static getRootOf(node: FamilyTree.node): FamilyTree.node;
+    /**
+     * is null, empty or undefined
+     * @param val 
+     */
     static isNEU(val: unknown): boolean;
     static gradientCircleForDefs(id: string | number, colors: Array<string> | string, r: number, strokeWidth: number): string;
 
@@ -742,7 +620,16 @@ declare class FamilyTree {
     static templates :{ [key: string]: FamilyTree.template} ;
 
 
-
+    static scroll: {
+        visible?: boolean,
+        smooth?: number,
+        speed?: number,
+        safari?: { smooth?: number; speed?: number; },
+        edge?: { smooth?: number; speed?: number; },
+        chrome?: { smooth?: number; speed?: number; },
+        firefox?: { smooth?: number; speed?: number; },
+        opera?: { smooth?: number; speed?: number; }
+    };
 
     static events: {
         on(type: "node-created" | "layout", listener: (args: unknown, args1: unknown, args2: unknown) => void): void
@@ -851,20 +738,9 @@ declare class FamilyTree {
 
 }
 
-declare namespace FamilyTree {
+declare namespace FamilyTree {    
     /**
-     * deprecated, use FamilyTree.align.center isntead
-     * @ignore
-     */
-    const CENTER: number;    
-    /**
-     * deprecated, use FamilyTree.align.orientation isntead
-     * @ignore
-     */
-    const ORIENTATION: number;
-
-    
-    /**
+     * deprecated
      * @ignore
      */
     const none: number;
@@ -879,44 +755,9 @@ declare namespace FamilyTree {
      */
     const COLLAPSE_SUB_CHILDRENS: number;
 
-    /**
-     * deprecated, use FamilyTree.layout.normal isntead
-     * @ignore
-     */
-    const normal: number;  
-    
-    /**
-     * deprecated, use FamilyTree.layout.mixed isntead
-     * @ignore
-     */
-    const mixed: number;
-    /**
-     * deprecated, use FamilyTree.layout.tree isntead
-     * @ignore
-     */    
-    const tree: number;
-    /**
-     * deprecated, use FamilyTree.layout.treeLeftOffset isntead
-     * @ignore
-     */    
-    const treeLeftOffset: any;
-    /**
-     * deprecated, use FamilyTree.layout.treeRightOffset isntead
-     * @ignore
-     */        
-    const treeRightOffset: any;
 
 
-    const scroll: {
-        visible?: boolean,
-        smooth?: number,
-        speed?: number,
-        safari?: { smooth?: number; speed?: number; },
-        edge?: { smooth?: number; speed?: number; },
-        chrome?: { smooth?: number; speed?: number; },
-        firefox?: { smooth?: number; speed?: number; },
-        opera?: { smooth?: number; speed?: number; }
-    };
+
 
     interface template  
          {
@@ -1073,7 +914,7 @@ declare namespace FamilyTree {
 
 
 
-    type toolbar = {
+    interface toolbar  {
         layout?: boolean,
         zoom?: boolean,
         fit?: boolean,
@@ -1082,7 +923,7 @@ declare namespace FamilyTree {
     }
 
 
-    type exportOptions = {
+    interface exportOptions  {
         margin?: Array<number>,
         padding?: number,
         landscape?: boolean,
@@ -1094,22 +935,22 @@ declare namespace FamilyTree {
         openInNewTab?: boolean
     }
 
-    type linkTemplate = {
+    interface linkTemplate {
         defs?: string,
         link?: string,
         label?: string,
         labelPosition?: string
     }
-    type menu = {
+    interface menu  {
         [key: string]: {
-            text?: string,
+            text: string,
             icon?: string,
             onClick?: Function,
             color?: string,
             draggable?: boolean
         }
     }
-    type editFormElement = {
+    interface editFormElement {
         type?: string,
         label?: string,
         binding?: string,
@@ -1117,13 +958,13 @@ declare namespace FamilyTree {
         btn?: string,
         vlidators?: { required?: string, email?: string }
     }
-    type link = {
+    interface link {
         from?: string | number,
         to?: string | number,
         template?: string,
         label?: string
     }
-    type orderBy = {
+    interface orderBy {
         field?: string,
         desc?: boolean
     }
@@ -1198,7 +1039,7 @@ declare namespace FamilyTree {
         none
     }
 
-    type node = {
+    interface node {
         /**
          * the same id you provided in the source node
          */
@@ -1345,15 +1186,7 @@ declare namespace FamilyTree {
          */
         lazyLoading?: boolean,
 
-        /**
-         * With the drag and drop features enabled you can move nodes easily and change the tree structure. Default value - *false*.
-         * ```typescript     
-         * var chart = new FamilyTree('#tree', {
-         *      enableDragDrop: true
-         * });
-         * ```
-         */
-        enableDragDrop?: boolean,
+ 
 
         /**
          * Enables advanced search. Default value is true.
@@ -2048,7 +1881,7 @@ declare namespace FamilyTree {
          * ```typescript       
          * var chart = new FamilyTree('#tree', {
          *   state: {
-         *       name: 'StateForMyOrgChart',
+         *       name: 'MyStateName',
          *       readFromLocalStorage: true,
          *       writeToLocalStorage: true,
          *       readFromIndexedDB: true,
