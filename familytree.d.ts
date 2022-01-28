@@ -1924,4 +1924,111 @@ declare namespace FamilyTree {
             elements?: { [key: string]: FamilyTree.editFormElement | Array<FamilyTree.editFormElement> }
         }
     }
-}export default FamilyTree
+}
+/// <reference path="../family-tree/FamilyTree.d.ts" />
+
+declare class FamilyTreeBase {
+    /**
+     * Hides the tree menu
+     * @param redraw 
+     * @param callback called at the end of the animation
+     */
+    hideTreeMenu(redraw: boolean, callback?: () => void): void;
+
+    /**
+     * Shows tree menu
+     * @param id node id
+     * @param callback called at the end of the animation
+     */
+    showTreeMenu(id: string | number, callback?: () => void): void;
+
+
+    /**
+     * Adds child
+     * @param data child node data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}  
+     */
+    addChildNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Adds child and partner 
+     * @param id id of the existing partner node
+     * @param childData child data 
+     * @param parentData partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
+     */
+    addChildAndPartnerNodes(id: string | number, childData: object, parentData: object, callback?: () => void, fireEvent?: boolean): void;
+
+    /**
+     * Adds partner node
+     * 
+     * data.pids partner id should be an existing id
+     * @param data new added partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
+     */
+    addPartnerNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Adds parrent
+     * @param childId node child id 
+     * @param type mother or father 
+     * @param data new added parent data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    addParentNode(childId:number | string, type: 'mid' | 'fid', data:object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Removes node if the node can be removed
+     * @param id node id  to be removed
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    removeNode(id:number | string, callback?: () => void, fireEvent?: boolean): void;
+
+    /**
+     * The on() method of the OrgChart class sets up a function that will be called whenever the specified event is delivered to the target.     * 
+     * @category Event Listeners
+     * @param type A case-sensitive string representing the event type to listen for.
+     * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
+     */
+     on(type: "init" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args: unknown, args1: unknown, args2: unknown) => void | boolean): FamilyTree;
+
+    /**
+     * Occurs when the node data has been updated, removed or added.
+     *  ```typescript     
+     * var family = new FamilyTree('#tree', {});
+     * family.onUpdateNode((args) => {
+     *  //return false; to cancel the operation
+     * });
+     * ```
+     * @category Event Listeners
+     * @param listener 
+     */
+    onUpdateNode(listener: (args: {
+        addNodesData: Array<object>,
+        updateNodesData: Array<object>,
+        removeNodeId: number | string
+    }) => void): FamilyTree;
+}
+
+
+
+declare namespace FamilyTree {
+    interface template {
+        nodeTreeMenuButton: string,
+        nodeTreeMenuCloseButton: string
+    }
+}
+export default FamilyTree
