@@ -174,7 +174,13 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param retrieveFields retrive data for fields
      * {@link https://balkan.app/FamilyTreeJS/Docs/Search | See doc...}            
      */
-    search(value: string, searchInFileds?: Array<string>, retrieveFields?: Array<string>): void;
+    search(value: string, searchInFileds?: Array<string>, retrieveFields?: Array<string>): Array<{
+        id: number | string,
+        name: string,
+        __score: number,
+        __searchField: string,
+        __searchMarks: string
+    }>;
     /**
      * Gets collpased node ids of the specifeid node
      * @param node 
@@ -547,7 +553,8 @@ declare class FamilyTree extends FamilyTreeBase {
     nodeCircleMenuUI: FamilyTree.circleMenuUI;
     nodeContextMenuUI: FamilyTree.menuUI;
     menuUI: FamilyTree.menuUI;
-    toolbarUI: FamilyTree.toolbarUI;
+    toolbarUI: FamilyTree.toolbarUI;    
+    config: FamilyTree.options
 
     static fileUploadDialog(callback: () => void): void;
     static isMobile(): boolean;
@@ -596,21 +603,21 @@ declare class FamilyTree extends FamilyTreeBase {
 
 
     static icon: {
-        png: (w: string, h: string, c: string) => string,
-        pdf: (w: string, h: string, c: string) => string,
-        svg: (w: string, h: string, c: string) => string,
-        csv: (w: string, h: string, c: string) => string,
-        excel: (w: string, h: string, c: string) => string,
-        edit: (w: string, h: string, c: string) => string,
-        details: (w: string, h: string, c: string) => string,
-        remove: (w: string, h: string, c: string) => string,
-        add: (w: string, h: string, c: string) => string,
-        xml: (w: string, h: string, c: string) => string,
-        link: (w: string, h: string, c: string) => string,
-        happy: (w: string, h: string, c: string) => string,
-        sad: (w: string, h: string, c: string) => string,
-        share: (w: string, h: string, c: string, x: string, y: string) => string,
-        user: (w: string, h: string, c: string, x: string, y: string) => string
+        png: (w: string| number, h: string | number, c: string) => string,
+        pdf: (w: string | number| number, h: string | number, c: string) => string,
+        svg: (w: string| number, h: string| number, c: string | number) => string,
+        csv: (w: string| number, h: string| number, c: string| number) => string,
+        excel: (w: string| number, h: string| number, c: string| number) => string,
+        edit: (w: string| number, h: string| number, c: string| number) => string,
+        details: (w: string| number, h: string| number, c: string| number) => string,
+        remove: (w: string| number, h: string| number, c: string| number) => string,
+        add: (w: string| number, h: string| number, c: string| number) => string,
+        xml: (w: string| number, h: string| number, c: string| number) => string,
+        link: (w: string| number, h: string| number, c: string| number) => string,
+        happy: (w: string| number, h: string| number, c: string| number) => string,
+        sad: (w: string| number, h: string| number, c: string| number) => string,
+        share: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        user: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string
     }
 
 
@@ -735,6 +742,8 @@ declare class FamilyTree extends FamilyTreeBase {
     * @ignore
     */
     static LAZY_LOADING_FACTOR: number;
+
+
 
 }
 
@@ -2003,7 +2012,7 @@ declare class FamilyTreeBase {
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
      */
-     on(type: "init" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args: unknown, args1: unknown, args2: unknown) => void | boolean): FamilyTree;
+     on(type: "init" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: unknown, args1?: unknown, args2?: unknown) => void | boolean): FamilyTree;
 
     /**
      * Occurs when the node data has been updated, removed or added.
