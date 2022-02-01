@@ -1,3 +1,5 @@
+
+
 declare class FamilyTree extends FamilyTreeBase {
     nodes: { [key: string | number]: FamilyTree.node };
     isVisible: boolean;
@@ -93,7 +95,7 @@ declare class FamilyTree extends FamilyTreeBase {
      */
     getXML(): string;
     /**
-     * Draws the chart.
+     * Draws the family.
      * @param action Action for example FamilyTree.action.centerNode, default is FamilyTree.action.update
      * @param actionParams parameters for the action
      * @param callback called when the animation completes
@@ -117,7 +119,7 @@ declare class FamilyTree extends FamilyTreeBase {
      */
     setViewBox(viewBox: Array<number>): void;
     /**
-     * Gets the current scale of the chart.
+     * Gets the current scale of the family.
      * @param viewBox 
      */
     getScale(viewBox?: Array<number>): void;
@@ -168,7 +170,7 @@ declare class FamilyTree extends FamilyTreeBase {
      */
     setOrientation(orientation: FamilyTree.orientation, lcn?: string): void;
     /**
-     * Search in the chart.
+     * Search in the family.
      * @param value search for value
      * @param searchInFileds search in field names
      * @param retrieveFields retrive data for fields
@@ -298,7 +300,7 @@ declare class FamilyTree extends FamilyTreeBase {
      */    
     importXML(filename?: string): void;
     /**
-     * Zoom out or zoom in the chart.
+     * Zoom out or zoom in the family.
      * @param delta true for zoom in, false for zoom out or scale number, if scale is > 1 it will zoom in and scale < 1 zoom out.
      * @param center array [x, y], where x is x percantege from the width and y is y percentage from the height.
      * @param shouldAnimate should animate 
@@ -310,8 +312,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * The onField() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onField((args) => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onField((args) => {
      *      //return false; to cancel
      * });
      * ```
@@ -344,8 +346,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Occurs when the nodes in FamilyTree has been created and loaded to the DOM.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onInit(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onInit(() => {
      * });
      * ```
      * @category Event Listeners
@@ -356,10 +358,10 @@ declare class FamilyTree extends FamilyTreeBase {
 
 
     /**
-     * The onRedraw event occurs when the chart is redrawed.
+     * The onRedraw event occurs when the family is redrawed.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onRedraw(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onRedraw(() => {
      * });
      * ```
      * @category Event Listeners
@@ -368,10 +370,10 @@ declare class FamilyTree extends FamilyTreeBase {
     onRedraw(listener: () => void): FamilyTree;
 
     /**
-     * The onExpandCollpaseButtonClick event occurs when the chart is redrawed.
+     * The onExpandCollpaseButtonClick event occurs when the family is redrawed.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onExpandCollpaseButtonClick(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onExpandCollpaseButtonClick(() => {
      *  //return false; to cancel the operation
      * });
      * ```
@@ -395,8 +397,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Occurs in the beginning of the export. Extra css styles can be added to the exported document using this event listener or show loading image.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onExporStart(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onExporStart(() => {
      *  args.styles += '<link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">';
      *  //return false; to cancel the operation
      * });
@@ -452,8 +454,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Occurs in the beginning of the export. Use this event listener to hide loading image or upload exported document to your server using ArrayBuffer argument.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onExporEnd(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onExporEnd(() => {
      *  //return false; to cancel the operation for example id you prefer the exported document to not download
      * });
      * ```
@@ -511,8 +513,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * On node click event listener.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onNodeClick(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onNodeClick(() => {
      *  //return false; to cancel the operation      
      * });
      * ```
@@ -532,8 +534,8 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * On node double click event listener.
      *  ```typescript     
-     * var chart = new FamilyTree('#tree', {});
-     * chart.onNodeDoubleClick(() => {
+     * var family = new FamilyTree('#tree', {});
+     * family.onNodeDoubleClick(() => {
      *  //return false; to cancel the operation 
      * });
      * ```
@@ -564,12 +566,12 @@ declare class FamilyTree extends FamilyTreeBase {
     static isTrial(): boolean;
     /**
      * Count all children nodes of the specified id.
-     * @param chart FamilyTree instance
+     * @param family FamilyTree instance
      * @param node 
      * @param count 
      */
-    static childrenCount(chart: FamilyTree, node: FamilyTree.node, count?: number): number;
-    static collapsedChildrenCount(chart: FamilyTree, node: FamilyTree.node, count?: number): number;
+    static childrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
+    static collapsedChildrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
     static getRootOf(node: FamilyTree.node): FamilyTree.node;
     /**
      * is null, empty or undefined
@@ -583,21 +585,15 @@ declare class FamilyTree extends FamilyTreeBase {
      * Shows/hides lloading image. Usefull when export large data to pdf. You can override and show your own loading image.
      */
     static loading: {
-        show: (chart: FamilyTree) => void,
-        hide: (chart: FamilyTree) => void
+        show: (family: FamilyTree) => void,
+        hide: (family: FamilyTree) => void
     }
 
     static clinkTemplates: {
-        orange?: FamilyTree.linkTemplate,
-        blue?: FamilyTree.linkTemplate,
-        yellow?: FamilyTree.linkTemplate,
         [key: string]: FamilyTree.linkTemplate
     }
 
     static slinkTemplates: {
-        orange?: FamilyTree.linkTemplate,
-        blue?: FamilyTree.linkTemplate,
-        yellow?: FamilyTree.linkTemplate,
         [key: string]: FamilyTree.linkTemplate
     }
 
@@ -1096,7 +1092,7 @@ declare namespace FamilyTree {
          */
         tags?: Array<string>,
         /**
-         * template name, you can specify multiple templates with tags in one chart
+         * template name, you can specify multiple templates with tags in one family
          */
         templateName?: string,
         /**
@@ -1169,7 +1165,7 @@ declare namespace FamilyTree {
         /**
          * Enables or disables the browser events handlers like click, pan, zoom, pinch, etc. Default value - *true*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      interactive: false
          * });
          * ```
@@ -1179,7 +1175,7 @@ declare namespace FamilyTree {
         /**
          * Color mode. Default value - *light*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      mode: "dark"
          * });
          * ```
@@ -1188,7 +1184,7 @@ declare namespace FamilyTree {
         /**
          * Lazy loading is technique that defers loading of non-critical nodes at page load time. Instead, these non-critical nodes are loaded at the moment of need. Default value - *true*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      lazyLoading: false
          * });
          * ```
@@ -1200,7 +1196,7 @@ declare namespace FamilyTree {
         /**
          * Enables advanced search. Default value is true.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      enableSearch: false
          * });
          * ```
@@ -1210,16 +1206,16 @@ declare namespace FamilyTree {
         /**
          * Enable touch instead of mouse for particular devices with touchscreen/touchpad/trackpad. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      enableTouch: true
          * });
          * ```
          */
         enableTouch?: boolean,
         /**
-         * Enable keyboard navigation. Use "f" for find, arrows and space to navigate in the chart. Default value - *false*.
+         * Enable keyboard navigation. Use "f" for find, arrows and space to navigate in the family. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      enableKeyNavigation: true
          * });
          * ```
@@ -1229,7 +1225,7 @@ declare namespace FamilyTree {
         /**
          * Shows mini map over the expanded tree. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      miniMap: true
          * });
          * ```
@@ -1238,7 +1234,7 @@ declare namespace FamilyTree {
         /**
          * Enables edit, add, remove and other node operations. Also you can define your own node operation.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      nodeMenu:{
          *          details: {text:"Details"},
          *       	edit: {text:"Edit"},
@@ -1254,7 +1250,7 @@ declare namespace FamilyTree {
         /**
          * With node circle menu you can add, edit, remove node or create clink/slink with drga and drop. Before setting this option make sure that you defined nodeCircleMenuButton in the ysed template.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *       nodeCircleMenu: {
          *           editNode: {
          *               icon: FamilyTree.icon.edit(24, 24, '#aeaeae'),
@@ -1276,7 +1272,7 @@ declare namespace FamilyTree {
         /**
          * Customizable context menu. Also you can define your own node operation.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      nodeContextMenu:{
          *          details: {text:"Details"},
          *       	edit: {text:"Edit"},
@@ -1292,7 +1288,7 @@ declare namespace FamilyTree {
         /**
          * Enables export to excel, export to svg and other FamilyTree operations. Also you can define your own FamilyTree operation.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      menu:{
          *          svg: { text: "Export SVG" },
          *          csv: { text: "Export CSV" }
@@ -1306,7 +1302,7 @@ declare namespace FamilyTree {
         /**
          * With the toolbar enabled allows you to change the layout, zoom in/out, expand all nodes, etc.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      toolbar: {
          *          layout: true,
          *          zoom: true,
@@ -1319,9 +1315,9 @@ declare namespace FamilyTree {
          */
         toolbar?: FamilyTree.toolbar,
         /**
-         * Stops the chart locking to the top of the screen once you move it.
+         * Stops the family locking to the top of the screen once you move it.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      sticky: false
          * });
          * ```
@@ -1333,11 +1329,11 @@ declare namespace FamilyTree {
          * - FamilyTree.action.details - will open the details view for the clicked node on the right hand side, the details view is very similar to the edit view the only difference is that is read only.
          * - FamilyTree.action.expandCollapse - will expand or collapse the children nodes
          * - FamilyTree.action.none - do nothing on node click event
-         * - FamilyTree.action.pan - allows you to move the chart in any direction
+         * - FamilyTree.action.pan - allows you to move the family in any direction
          * 
          * Default value - *FamilyTree.action.details*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      nodeMouseClick: FamilyTree.action.edit
          * });
          * ```
@@ -1352,7 +1348,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *FamilyTree.action.none*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      nodeMouseDbClick: FamilyTree.action.edit
          * });
          * ```
@@ -1362,13 +1358,13 @@ declare namespace FamilyTree {
          * mouseScrool can accept the following values:
          * - FamilyTree.action.zoom - will zoom in/out on mouse scroll
          * - FamilyTree.action.ctrlZoom - will zoom in/out on mouse scroll and ctrl button is pressed
-         * - FamilyTree.action.xScroll - left/right move of the chart on mouse scroll
-         * - FamilyTree.action.yScroll - up/down move of the chart on mouse scroll
+         * - FamilyTree.action.xScroll - left/right move of the family on mouse scroll
+         * - FamilyTree.action.yScroll - up/down move of the family on mouse scroll
          * - FamilyTree.action.none - do nothing on mouse scroll
          * 
          * Default value - *FamilyTree.action.zoom*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      mouseScrool: FamilyTree.action.ctrlZoom
          * });
          * ```
@@ -1377,7 +1373,7 @@ declare namespace FamilyTree {
         /**
          * Shows horizontal scrollbar. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      showXScroll: true
          * });
          * ```
@@ -1386,14 +1382,14 @@ declare namespace FamilyTree {
         /**
          * Shows vertical scrollbar. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      showYScroll: true
          * });
          * ```
          */
         showYScroll?: boolean ,
         /**
-         * Set template if you want to change the appearance of the chart. Family Tree JS comes with number of build-in templates:
+         * Set template if you want to change the appearance of the family. Family Tree JS comes with number of build-in templates:
          * - ana
          * - ula
          * - olivia
@@ -1409,7 +1405,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *ana*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      template: 'olivia'
          * });
          * ```
@@ -1424,7 +1420,7 @@ declare namespace FamilyTree {
          * - Set the node level {@link https://balkan.app/FamilyTreeJS/Demos/SubLevels | See demo...}
          * - Set specific options for sub trees like layout templates etc {@link https://balkan.app/FamilyTreeJS/Docs/SubTrees | See doc...}          
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      tags: {
          *          myTag: {template: 'olivia'}
          *      },
@@ -1457,7 +1453,7 @@ declare namespace FamilyTree {
         /**
          * Minimize/Maximize node. The template has to have min defined. Default value - *false*.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *      min: true
          * });
          * ```
@@ -1467,7 +1463,7 @@ declare namespace FamilyTree {
         /**
          * Node binding in Family Tree JS maps node data to node template parameters.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   nodeBinding: {
          *       field_0: "name"
          *   },
@@ -1481,7 +1477,7 @@ declare namespace FamilyTree {
         /**
          * Link binding in Family Tree JS maps node data to link template parameters.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   nodeBinding: {
          *       link_field_0: "createdAt"
          *   },
@@ -1498,7 +1494,7 @@ declare namespace FamilyTree {
         /**
          * Search by the fields defined in searchFields.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   searchFields: ["name", "title", etc...]
          * });
          * ```
@@ -1508,7 +1504,7 @@ declare namespace FamilyTree {
         /**
          * Displays a field in the search result.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   searchDisplayField: "name"
          * });
          * ```
@@ -1518,7 +1514,7 @@ declare namespace FamilyTree {
         /**
          * Search by weight of the fields.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   searchFieldsWeight: {
          *       "Name": 100, //percent
          *       "Title": 20 //percent
@@ -1529,14 +1525,14 @@ declare namespace FamilyTree {
          */
         searchFieldsWeight?: { [key: string]: number },
         /**
-         * Array of node data JSON objects. nodes option is the data source of the chart. Node JSON objects could have unlimited number of properties, id, pid, ppid, stpid and tags are reserved node properties.
+         * Array of node data JSON objects. nodes option is the data source of the family. Node JSON objects could have unlimited number of properties, id, pid, ppid, stpid and tags are reserved node properties.
          * - id - unique identifier, it clould be integer or string
          * - pid - is the parent id
          * - stpid - subtree parent id
          * - ppid - parent partner id
          * - tags - array of strings
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   nodes: [
          *       { id: 1 },
          *       { id: 2, pid: 1, tags: ["Sales"] },
@@ -1549,7 +1545,7 @@ declare namespace FamilyTree {
         /**
          * Adds curved link.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   clinks: [
          *       from: 4, to: 0, label: 'text'}, 
          *       {from: 4, to: 5, template: 'blue', label: '4 reports to 3' },
@@ -1562,7 +1558,7 @@ declare namespace FamilyTree {
         /**
          * Adds second link.
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   slinks: [
          *       from: 4, to: 0, label: 'text'}, 
          *       {from: 4, to: 5, template: 'blue', label: '4 reports to 3' },
@@ -1575,7 +1571,7 @@ declare namespace FamilyTree {
         /**
          * The gap between each level. Default value - *60*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   levelSeparation: 50
          * });
          * ```
@@ -1584,7 +1580,7 @@ declare namespace FamilyTree {
         /**
          * The gap between nodes in a subtree. Default value - *20*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   siblingSeparation: 50
          * });
          * ```
@@ -1593,7 +1589,7 @@ declare namespace FamilyTree {
         /**
          * The gap between subtrees. Default value - *40*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   subtreeSeparation: 50
          * });
          * ```
@@ -1602,7 +1598,7 @@ declare namespace FamilyTree {
         /**
          * The gap between nodes in vertical layout. Default value - *20*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   mixedHierarchyNodesSeparation: 5
          * });
          * ```
@@ -1611,7 +1607,7 @@ declare namespace FamilyTree {
         /**
          * Set the assistant separation value. Default value - *100*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   assistantSeparation: 150
          * });
          * ```
@@ -1620,7 +1616,7 @@ declare namespace FamilyTree {
         /**
          * Minimum gap between partner and node with partners. Default value - *50*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   minPartnerSeparation: 100
          * });
          * ```
@@ -1629,7 +1625,7 @@ declare namespace FamilyTree {
         /**
          * Gap between partner links. Default value - *20*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   partnerChildrenSplitSeparation: 50
          * });
          * ```
@@ -1638,16 +1634,16 @@ declare namespace FamilyTree {
         /**
          * Gap between partners. Default value - *15*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   partnerNodeSeparation: 30
          * });
          * ```
          */
         partnerNodeSeparation?: number,
         /**
-         * The number of colums if the chart has multiple root nodes. Default value - *10*
+         * The number of colums if the family has multiple root nodes. Default value - *10*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   columns: 1
          * });
          * ```
@@ -1656,7 +1652,7 @@ declare namespace FamilyTree {
         /**
          * The padding option sets the padding area on all four sides of the FamilyTree. Default value - *30*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   padding: 20
          * });
          * ```
@@ -1675,7 +1671,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *FamilyTree.orientation.top*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   orientation: FamilyTree.orientation.bottom
          * });
          * ```
@@ -1691,7 +1687,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *FamilyTree.layout.normal*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   layout: FamilyTree.layout.mixed
          * });
          * ```          
@@ -1706,7 +1702,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *1*
          * ```typescript     
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   scaleInitial: FamilyTree.match.boundary
          * });
          * ```          
@@ -1716,7 +1712,7 @@ declare namespace FamilyTree {
         /**
          * Determines the minimum scale factor. Default value - *0.1*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   scaleMin: 0.2
          * });
          * ```          
@@ -1725,7 +1721,7 @@ declare namespace FamilyTree {
         /**
          * Determines the naximum scale factor. Default value - *5*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   scaleMax: 10
          * });
          * ```          
@@ -1734,7 +1730,7 @@ declare namespace FamilyTree {
         /**
           * The orderBy option is used to sort the nodes in ascending order by specified field. The default order is by nodes order in the nodes array. Default value - *null*
           * ```typescript       
-          * var chart = new FamilyTree('#tree', {
+          * var family = new FamilyTree('#tree', {
           *   orderBy: "orderId",
           *   nodes: [
           *       { id: 10, pid: 1, orderId: 2 },
@@ -1743,7 +1739,7 @@ declare namespace FamilyTree {
           * });
           * ```    
           * ```typescript       
-          * var chart = new FamilyTree('#tree', {
+          * var family = new FamilyTree('#tree', {
           *   orderBy: [field: "orderId", desc: true],
           *   nodes: [
           *       { id: 10, pid: 1, orderId: 2 },
@@ -1800,16 +1796,16 @@ declare namespace FamilyTree {
         /**
          * The URL to the export server. Default value - *https://balkan.app/export*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   exportUrl: "https://balkan.app/export"
          * });
          * ```          
          */        
         exportUrl?: string,
         /**
-         * Collapse specified level of the chart and its children if allChildren is true.
+         * Collapse specified level of the family and its children if allChildren is true.
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   collapse: {level: 2, allChildren: true}
          * });
          * ```          
@@ -1821,9 +1817,9 @@ declare namespace FamilyTree {
         /**
          * Expand specified node ids and its children if allChildren is true. The expand option works only if collapse is set.
          * 
-         * In the example above the second level of the chart will be collapsed but node with id 155 and its children will be expanded.
+         * In the example above the second level of the family will be collapsed but node with id 155 and its children will be expanded.
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   collapse: {level: 2, allChildren: true},
          *   expand: {nodes: [155], allChildren: true}
          * });
@@ -1840,7 +1836,7 @@ declare namespace FamilyTree {
          * 
          * Default value - *FamilyTree.align.center*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   align: FamilyTree.align.orientation
          * });
          * ```          
@@ -1849,7 +1845,7 @@ declare namespace FamilyTree {
         /**
          * Can be used to control the transition of the nodes on expand/collapse operation. Default value - *func: FamilyTree.anim.outPow, duration: 200*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   anim: {func: FamilyTree.anim.outBack, duration: 500}
          * });
          * ```          
@@ -1867,7 +1863,7 @@ declare namespace FamilyTree {
         /**
          * Can be used to control the zooming sensitivity. Default value - *speed: 120, smooth: 12*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   zoom: {speed: 130, smooth: 10}
          * });
          * ```          
@@ -1879,7 +1875,7 @@ declare namespace FamilyTree {
         /**
          * Define nodes as roots. Default value - *null*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   roots: [2, 4]
          * });
          * ```          
@@ -1888,7 +1884,7 @@ declare namespace FamilyTree {
         /**
          * Persist the state (scale, position, expanded/collapsed and min/max nodes) in the url or indexedDB. Default value - *null*
          * ```typescript       
-         * var chart = new FamilyTree('#tree', {
+         * var family = new FamilyTree('#tree', {
          *   state: {
          *       name: 'MyStateName',
          *       readFromLocalStorage: true,
