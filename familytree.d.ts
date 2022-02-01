@@ -1930,7 +1930,6 @@ declare namespace FamilyTree {
         }
     }
 }
-/// <reference path="../family-tree/FamilyTree.d.ts" />
 
 declare class FamilyTreeBase {
     /**
