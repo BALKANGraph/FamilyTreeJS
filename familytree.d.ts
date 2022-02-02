@@ -830,6 +830,11 @@ declare namespace FamilyTree {
          */
         hide(): void;
         content(id: string | number, detailsMode: boolean, dontAnim: boolean, width: string, dontRenderButtons: boolean): string;
+        /**
+         * Sets the avatar of the edit form
+         * @param avatarUrl avatar url
+         */
+        setAvatar(avatarUrl?: string): void;
     }
 
     interface searchUI {
