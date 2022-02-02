@@ -85,6 +85,15 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param data node data array
      */
     load(data: Array<object>): FamilyTree;
+
+    /**
+     * Updates the node data, redraws the family and fires update event.
+     * @param data node data
+     * @param callback function called when the animation completes
+     * @param fireEvent if it set to true the update event is called
+     */
+    updateNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
     /**
      * Loads nodes from xml.
      * @param xml Xml with node structure
