@@ -407,7 +407,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * Occurs in the beginning of the export. Extra css styles can be added to the exported document using this event listener or show loading image.
      *  ```typescript     
      * var family = new FamilyTree('#tree', {});
-     * family.onExporStart(() => {
+     * family.onExportStart(() => {
      *  args.styles += '<link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">';
      *  //return false; to cancel the operation
      * });
@@ -415,7 +415,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */             
-    onExporStart(listener: (args: 
+    onExportStart(listener: (args: 
         {
         /**
          * the content to be exported
@@ -464,14 +464,14 @@ declare class FamilyTree extends FamilyTreeBase {
      * Occurs in the beginning of the export. Use this event listener to hide loading image or upload exported document to your server using ArrayBuffer argument.
      *  ```typescript     
      * var family = new FamilyTree('#tree', {});
-     * family.onExporEnd(() => {
+     * family.onExportEnd(() => {
      *  //return false; to cancel the operation for example id you prefer the exported document to not download
      * });
      * ```
      * @category Event Listeners
      * @param listener 
      */         
-    onExporEnd(listener: (args: 
+    onExportEnd(listener: (args: 
         /**
          * for PDF/PNG
          */
@@ -747,9 +747,11 @@ declare class FamilyTree extends FamilyTreeBase {
     * @ignore
     */
     static LAZY_LOADING_FACTOR: number;
-
-
-
+   
+    /**
+     * Hides the Edit Form when the family is moved with pan
+     */
+    static HIDE_EDIT_FORM_ON_PAN: boolean;
 }
 
 declare namespace FamilyTree {    
@@ -817,7 +819,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */
-        on(type: "show" | "element-btn-click" | "button-click" | "hide", listener: (sender: editUI, args: unknown, args1: unknown, args2: unknown) => void | boolean): editUI;
+        on(type: "show" | "save" | "cancel" | "element-btn-click" | "button-click" | "hide", listener: (sender: editUI, args: unknown, args1: unknown, args2: unknown) => void | boolean): editUI;
         /**
          * Shows the edit form for the specified node id
          * @param id node id
@@ -1927,7 +1929,8 @@ declare namespace FamilyTree {
         editForm?: {
             readOnly?: boolean,
             titleBinding?: string,
-            photoBinding?: string,
+            photoBinding?: string,            
+            focusBinding?: string,
             addMore?: string,
             addMoreBtn?: string,
             addMoreFieldName?: string,
