@@ -1,7 +1,7 @@
 
 
 declare class FamilyTree extends FamilyTreeBase {
-    nodes: { [key: string | number]: FamilyTree.node };
+    nodes: { [key in string | number]: FamilyTree.node };
     isVisible: boolean;
 
     /**
@@ -1934,6 +1934,8 @@ declare namespace FamilyTree {
             addMore?: string,
             addMoreBtn?: string,
             addMoreFieldName?: string,
+            saveAndCloseBtn?: string,
+            cancelBtn?: string,
             generateElementsFromFields?: boolean,
             buttons?: {
                 [key: string]: {
