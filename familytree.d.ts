@@ -1,7 +1,7 @@
 
 
 declare class FamilyTree extends FamilyTreeBase {
-    nodes: { [key in string | number]: FamilyTree.node };
+    nodes: { [key in any]: FamilyTree.node };
     isVisible: boolean;
 
     /**
@@ -146,8 +146,8 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param callback called when the animation completes
      */
     center(nodeId: string | number, options?: {
-        parentState: unknown,
-        childrenState: unknown,
+        parentState: any,
+        childrenState: any,
         rippleId: string | number,
         vertical: boolean,
         horizontal: boolean
@@ -341,7 +341,7 @@ declare class FamilyTree extends FamilyTreeBase {
         /**
          * value of the filed, can be changed in the event
          */
-        value: unknown, 
+        value: any, 
         /**
          * svg or html element of the filed, can be changed in the event
          */
@@ -586,7 +586,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * is null, empty or undefined
      * @param val 
      */
-    static isNEU(val: unknown): boolean;
+    static isNEU(val: any): boolean;
     static gradientCircleForDefs(id: string | number, colors: Array<string> | string, r: number, strokeWidth: number): string;
 
 
@@ -644,7 +644,7 @@ declare class FamilyTree extends FamilyTreeBase {
     };
 
     static events: {
-        on(type: "node-created" | "layout", listener: (args: unknown, args1: unknown, args2: unknown) => void): void
+        on(type: "node-created" | "layout", listener: (args: any, args1: any, args2: any) => void): void
     };
     static state: { clear(stateName: string): void };
 
@@ -819,7 +819,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */
-        on(type: "show" | "save" | "cancel" | "element-btn-click" | "button-click" | "hide", listener: (sender: editUI, args: unknown, args1: unknown, args2: unknown) => void | boolean): editUI;
+        on(type: "show" | "save" | "cancel" | "element-btn-click" | "button-click" | "hide", listener: (sender: editUI, args: any, args1: any, args2: any) => void | boolean): editUI;
         /**
          * Shows the edit form for the specified node id
          * @param id node id
@@ -847,7 +847,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */        
-        on(type: "searchclick", listener: (sender: FamilyTree, args: unknown, args1: unknown, args2: unknown) => void | boolean): searchUI;
+        on(type: "searchclick", listener: (sender: FamilyTree, args: any, args1: any, args2: any) => void | boolean): searchUI;
         /**
          * Hides the search grid
          */
@@ -868,7 +868,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */        
-        on(type: "show", listener: (sender: menuUI, args: unknown, args1: unknown, args2: unknown) => void | boolean): menuUI;
+        on(type: "show", listener: (sender: menuUI, args: any, args1: any, args2: any) => void | boolean): menuUI;
         /**
          * Shows menu next to html element
          * @param stickToElement 
@@ -915,7 +915,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */        
-        on(type: "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: unknown, args1: unknown, args2: unknown) => void | boolean): circleMenuUI;
+        on(type: "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: any, args1: any, args2: any) => void | boolean): circleMenuUI;
     }
 
     interface toolbarUI {
@@ -975,7 +975,7 @@ declare namespace FamilyTree {
         type?: string,
         label?: string,
         binding?: string,
-        options?: Array<unknown>,
+        options?: Array<any>,
         btn?: string,
         vlidators?: { required?: string, email?: string }
     }
@@ -2026,7 +2026,7 @@ declare class FamilyTreeBase {
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
      */
-     on(type: "init" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: unknown, args1?: unknown, args2?: unknown) => void | boolean): FamilyTree;
+     on(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: unknown, args1?: unknown, args2?: unknown) => void | boolean): FamilyTree;
 
     /**
      * Occurs when the node data has been updated, removed or added.
@@ -2043,6 +2043,21 @@ declare class FamilyTreeBase {
         addNodesData: Array<object>,
         updateNodesData: Array<object>,
         removeNodeId: number | string
+    }) => void): FamilyTree;
+
+    /**
+     * Occurs when node tree menu button is clecked. Use this event to modify the nodes in the tree menu.
+     *  ```typescript     
+     * var family = new FamilyTree('#tree', {});
+     * family.onNodeTreeMenuShow((args) => {  
+     * });
+     * ```
+     * @category Event Listeners
+     * @param listener 
+     */
+    onNodeTreeMenuShow(listener: (args: {
+        nodes: Array<object>,
+        node: object
     }) => void): FamilyTree;
 }
 
