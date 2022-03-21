@@ -648,6 +648,8 @@ declare class FamilyTree extends FamilyTreeBase {
     };
     static state: { clear(stateName: string): void };
 
+    static animate(element: Object, attrStart?: Object, attrEnd?: Object, duration?: number, func?: FamilyTree.anim, callback?: Function, tick?: boolean): void;
+
     static VERSION: string;
     /**
     * @ignore
@@ -752,6 +754,17 @@ declare class FamilyTree extends FamilyTreeBase {
      * Hides the Edit Form when the family is moved with pan
      */
     static HIDE_EDIT_FORM_ON_PAN: boolean;
+
+    /**
+    * @ignore
+    */
+    static element: HTMLElement;
+
+    static pdfPrevUI: any;
+    static randomId(): any;
+    static searchUI: any;
+    static attr: any;
+
 }
 
 declare namespace FamilyTree {    
@@ -772,6 +785,7 @@ declare namespace FamilyTree {
     const COLLAPSE_SUB_CHILDRENS: number;
 
 
+    var template: object;
 
 
 
@@ -803,8 +817,9 @@ declare namespace FamilyTree {
             img_0?: string,
             link_field_0?: string,
             editFormHeaderColor?: string,
-            nodeCircleMenuButton?: string,
-            min?: template
+            nodeCircleMenuButton?: object,
+            min?: template,
+            [name: string]: any
         }
 
     interface editUI {
@@ -915,7 +930,7 @@ declare namespace FamilyTree {
          * @param type A case-sensitive string representing the event type to listen for.
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */        
-        on(type: "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: any, args1: any, args2: any) => void | boolean): circleMenuUI;
+        on(type: "click" | "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: any, args1: any, args2: any) => void | boolean): circleMenuUI;
     }
 
     interface toolbarUI {
@@ -953,7 +968,9 @@ declare namespace FamilyTree {
         format?: "A1" | "A2" | "A3" | "A4" | "A5" | "A4" | "Letter" | "Legal",
         header?: string,
         footer?: string,
-        openInNewTab?: boolean
+        openInNewTab?: boolean,
+        expandChildren?: boolean,
+        nodeId? : number | string
     }
 
     interface linkTemplate {
@@ -966,7 +983,13 @@ declare namespace FamilyTree {
         [key: string]: {
             text: string,
             icon?: string,
-            onClick?: Function,
+            onClick?: Function
+        }
+    }
+    interface circleMenu  {
+        [key: string]: {
+            text: string,
+            icon?: string,
             color?: string,
             draggable?: boolean
         }
@@ -1284,7 +1307,7 @@ declare namespace FamilyTree {
          * ```
          * {@link https://balkan.app/FamilyTreeJS/Docs/Menus | See doc...}
          */
-        nodeCircleMenu?: FamilyTree.menu,
+        nodeCircleMenu?: FamilyTree.circleMenu,
         /**
          * Customizable context menu. Also you can define your own node operation.
          * ```typescript     
@@ -1449,7 +1472,7 @@ declare namespace FamilyTree {
                 template?: "ana" | "ula" | "olivia" | "belinda" | "rony" | "mery" | "polina" | "mila" | "diva" | "luba" | "isla" | "deborah" | "base" | "group" | "invisibleGroup" | string,
                 subLevels?: number,
                 nodeMenu?: FamilyTree.menu,
-                nodeCircleMenu?: FamilyTree.menu,
+                nodeCircleMenu?: FamilyTree.circleMenu,
                 nodeContextMenu?: FamilyTree.menu,
                 subTreeConfig?: {
                     orientation?: FamilyTree.orientation,
@@ -1557,7 +1580,7 @@ declare namespace FamilyTree {
          * });
          * ```
          */
-        nodes?: Array<string | number>,
+         nodes?: Array<Object>,
         /**
          * Adds curved link.
          * ```typescript     
@@ -2046,7 +2069,7 @@ declare class FamilyTreeBase {
     }) => void): FamilyTree;
 
     /**
-     * Occurs when node tree menu button is clecked. Use this event to modify the nodes in the tree menu.
+     * Occurs when node tree menu button is clicked. Use this event to modify the nodes in the tree menu.
      *  ```typescript     
      * var family = new FamilyTree('#tree', {});
      * family.onNodeTreeMenuShow((args) => {  
