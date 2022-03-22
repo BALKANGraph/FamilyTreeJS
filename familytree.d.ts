@@ -1966,9 +1966,10 @@ declare namespace FamilyTree {
                     text?: string,
                     hideIfEditMode?: boolean,
                     hideIfDetailsMode?: boolean
-                }
+                } | null
             },
-            elements?: { [key: string]: FamilyTree.editFormElement | Array<FamilyTree.editFormElement> }
+           // elements?: { [key: string]: FamilyTree.editFormElement | Array<FamilyTree.editFormElement> }
+           elements?: Array<FamilyTree.editFormElement | Array<FamilyTree.editFormElement>>
         }
     }
 }
