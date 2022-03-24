@@ -258,6 +258,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}        
      */
     exportPDFProfile(options: FamilyTree.exportOptions, callback?: () => void): void;
+    exportPDFPreview(options: FamilyTree.exportOptions): void;
     /**
      * Exports the details form to PDF.
      * @param options export options
@@ -760,11 +761,11 @@ declare class FamilyTree extends FamilyTreeBase {
     */
     static element: HTMLElement;
 
-    static pdfPrevUI: any;
     static randomId(): any;
     static searchUI: any;
     static attr: any;
-
+    static toolbarUI: any;
+    static elements: any;
 }
 
 declare namespace FamilyTree {    
