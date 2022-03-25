@@ -171,6 +171,15 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param layout layout type
      * @param lcn lyout config name for the specified sub tree
      */
+
+    /**
+     * Adds new node to the nodes collection, redraws the family and fires remove event
+     * @param data node data
+     * @param callback called at the end of animation
+     * @param fireEvent indicates if the add event will be called or not
+     */
+    addNode(data: object, callback?: () => void, fireEvent?: boolean): void;  
+
     setLayout(layout: FamilyTree.layout | number, lcn?: string): void;
     /**
      * Sets orientation.
