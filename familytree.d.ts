@@ -2060,7 +2060,7 @@ declare class FamilyTreeBase {
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
      */
-     on(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: unknown, args1?: unknown, args2?: unknown) => void | boolean): FamilyTree;
+     on(type: "init" | "add" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: unknown, args1?: unknown, args2?: unknown) => void | boolean): FamilyTree;
 
     /**
      * Occurs when the node data has been updated, removed or added.
