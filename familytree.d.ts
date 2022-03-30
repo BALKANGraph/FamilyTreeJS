@@ -577,7 +577,7 @@ declare class FamilyTree extends FamilyTreeBase {
     toolbarUI: FamilyTree.toolbarUI;    
     config: FamilyTree.options
 
-    static fileUploadDialog(callback: () => void): void;
+    static fileUploadDialog(callback: (file: any) => void): void;
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
@@ -832,7 +832,7 @@ declare namespace FamilyTree {
          * @param detailsMode If true the edit form is in read only mode
          * @param dontAnim 
          */
-        show(id: string | number, detailsMode: boolean, dontAnim: boolean): void;
+        show(id: string | number, detailsMode: boolean, dontAnim?: boolean): void;
         /**
          * Hides the edit form
          */
