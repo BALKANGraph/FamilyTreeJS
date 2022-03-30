@@ -131,7 +131,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * Gets the current scale of the family.
      * @param viewBox 
      */
-    getScale(viewBox?: Array<number>): void;
+    getScale(viewBox?: Array<number>): number;
     /**
      * Animates specified node with ripple animation - highlight the node.
      * @param id the id of the node
@@ -151,7 +151,7 @@ declare class FamilyTree extends FamilyTreeBase {
         rippleId: string | number,
         vertical: boolean,
         horizontal: boolean
-    }, callback?: () => void): void;
+    } | null, callback?: () => void): void;
     /**
      * Fits the content to the visible area.
      * @param callback called when the animation completes
@@ -617,28 +617,6 @@ declare class FamilyTree extends FamilyTreeBase {
     }
 
 
-    static icon: {
-        png: (w: string| number, h: string | number, c: string) => string,
-        pdf: (w: string | number| number, h: string | number, c: string) => string,
-        svg: (w: string| number, h: string| number, c: string | number) => string,
-        csv: (w: string| number, h: string| number, c: string| number) => string,
-        excel: (w: string| number, h: string| number, c: string| number) => string,
-        edit: (w: string| number, h: string| number, c: string| number) => string,
-        details: (w: string| number, h: string| number, c: string| number) => string,
-        remove: (w: string| number, h: string| number, c: string| number) => string,
-        add: (w: string| number, h: string| number, c: string| number) => string,
-        xml: (w: string| number, h: string| number, c: string| number) => string,
-        link: (w: string| number, h: string| number, c: string| number) => string,
-        happy: (w: string| number, h: string| number, c: string| number) => string,
-        sad: (w: string| number, h: string| number, c: string| number) => string,
-        share: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
-        user: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string
-    }
-
-
-
-
-
     static templates :{ [key: string]: FamilyTree.template} ;
 
 
@@ -775,6 +753,9 @@ declare class FamilyTree extends FamilyTreeBase {
     static attr: any;
     static toolbarUI: any;
     static elements: any;
+
+    static expcollOpenTag: any;
+    static grCloseTag: any;
 }
 
 declare namespace FamilyTree {    
@@ -1982,9 +1963,46 @@ declare namespace FamilyTree {
            elements?: Array<FamilyTree.editFormElement | Array<FamilyTree.editFormElement>>
         }
     }
+
+    var ui: {
+        defs(fromrender: string): string;
+        lonely(config: Object): string;
+        pointer(config: Object, action: FamilyTree.action, scale: number): string;
+        node(node: FamilyTree.node, data: Object, animations: FamilyTree.anim, config: Object, x: number | undefined, y: number | undefined, nodeBinding: Object | undefined, action: FamilyTree.action, scale: number, sender: Object): string; 
+        nodeBtns(config: Object, node: FamilyTree.node, action: FamilyTree.action, t: Object, sender: Object): string;
+        expandCollapseBtn(family: FamilyTree, node: FamilyTree.node, layoutConfigs: any, action: FamilyTree.action, scale: number): string;
+        link(node: FamilyTree.node, obj: Object, scale: number, bordersByRootIdAndLevel: Object, nodes: Object, action: FamilyTree.action): Array<string>;
+        svg(width: number, height: number, viewBox: Array<number>, config: Object, content: string, scale: number): string;
+        menuButton(config: Object): string;
+
+    };
+
+    var t: any;
 }
 
 declare class FamilyTreeBase {
+
+    static icon: {
+        png: (w: string| number, h: string | number, c: string) => string,
+        pdf: (w: string | number| number, h: string | number, c: string) => string,
+        svg: (w: string| number, h: string| number, c: string | number) => string,
+        csv: (w: string| number, h: string| number, c: string| number) => string,
+        excel: (w: string| number, h: string| number, c: string| number) => string,
+        edit: (w: string| number, h: string| number, c: string| number) => string,
+        details: (w: string| number, h: string| number, c: string| number) => string,
+        remove: (w: string| number, h: string| number, c: string| number) => string,
+        add: (w: string| number, h: string| number, c: string| number) => string,
+        xml: (w: string| number, h: string| number, c: string| number) => string,
+        link: (w: string| number, h: string| number, c: string| number) => string,
+        happy: (w: string| number, h: string| number, c: string| number) => string,
+        sad: (w: string| number, h: string| number, c: string| number) => string,
+        share: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        user: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        addUser: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        close: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        ft: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string
+    }
+
     /**
      * Hides the tree menu
      * @param redraw 
