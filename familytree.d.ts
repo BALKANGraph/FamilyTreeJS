@@ -326,7 +326,15 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param callback called when the animation completes
      */
     zoom(delta: boolean | number, center?: Array<number>, shouldAnimate?: boolean, callback?: () => void): void;
-
+    
+    /**
+     * Magnify(Zoom in) specific node in the family.
+     * @param id id of the node
+     * @param scale scale to magnify
+     * @param front show on front or back 
+     * @param anim animation type
+     */
+     magnify(id: string | number, scale: number, front?: boolean, anim?: FamilyTree.anim | null, callback?: () => void): void;
 
     /**
      * The onField() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.
@@ -592,13 +600,14 @@ declare class FamilyTree extends FamilyTreeBase {
     static childrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
     static collapsedChildrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
     static getRootOf(node: FamilyTree.node): FamilyTree.node;
+
     /**
      * is null, empty or undefined
      * @param val 
      */
     static isNEU(val: any): boolean;
     static gradientCircleForDefs(id: string | number, colors: Array<string> | string, r: number, strokeWidth: number): string;
-
+    static convertCsvToNodes(text: string) : Array<FamilyTree.node>;
 
     /**
      * Shows/hides lloading image. Usefull when export large data to pdf. You can override and show your own loading image.
@@ -737,6 +746,11 @@ declare class FamilyTree extends FamilyTreeBase {
     * @ignore
     */
     static LAZY_LOADING_FACTOR: number;
+    /**
+     * Can be used to instruct the browser to defer loading of FamilyTree that are off-screen until the user scrolls near them.
+     * The init event listener will be called as soon as the FamilyTree become visible.
+     */
+    static LAZY_LOADING: boolean;
    
     /**
      * Hides the Edit Form when the family is moved with pan
@@ -1074,122 +1088,7 @@ declare namespace FamilyTree {
         none
     }
 
-    interface node {
-        /**
-         * the same id you provided in the source node
-         */
-        id?: string | number,
-        /**
-         * same pid you provided in the source node, the default value is null if not provided or if node with the same id does not exist
-         */
-        pid?: string | number,
-        /**
-         *  partner parent id, it is the partner parent node id of the partner node, it is the same ppid you provided in the source node, the default value is undefined.
-         */
-        ppid?: string | number,
-        /**
-         * a reference to the parent node, default value is null, if the nodes is collapse this proprty is not initalized and can be null even if pid is not null
-         */
-        parent?: node,
-        /**
-         * ub tree parent id, it is the parent node id of the root node of the sub tree, it is the same stpid you provided in the source node, the default value is null if not provided or if node with the same id does not exist.
-         */
-        stpid?: string | number,
-        /**
-         * - a reference to the parent node of a sub tree, default value is null, if the parent node is minimized this proprty is not initalized and can be null even if we have stpid
-         */
-        stParent?: node,
-        isPartner?: boolean,
-        partnerSeparation?: number,
-        /**
-         * array of ids, always initialized
-         */
-        childrenIds?: Array<string | number>,
-        /**
-         * array of children nodes, initialized on demand if all children are collpased it will be empty array
-         */
-        children?: Array<node>,
-        /**
-         * array of sub tree children root node ids, always initialized
-         */
-        stChildrenIds?: Array<string | number>,
-        /**
-         * array of sub tree children root nodes, initialized on demand if the node is minimized it will be empty array
-         */
-        stChildren?: Array<node>,
-        /**
-         * array of string values, the same array you provided in the source node
-         */
-        tags?: Array<string>,
-        /**
-         * template name, you can specify multiple templates with tags in one family
-         */
-        templateName?: string,
-        /**
-         * a reference to the left node neighbor, the default value is undefined
-         */
-        leftNeighbor?: node | undefined,
-        /**
-         *  a reference to the right node neighbor, the default value is undefined
-         */
-        rightNeighbor?: node | undefined,
-        /**
-         * x position, default value undefined
-         */
-        x?: number | undefined,
-        /**
-         *  y position, default value undefined
-         */
-        y?: number | undefined,
-        /**
-         * width of the node, default value undefined
-         */
-        w?: number | undefined,
-        /**
-         * height of the node, default value undefined
-         */
-        h?: number | undefined,
-        /**
-         * if the node is assistant is true if not false if the node is not initialized is undefined
-         */
-        isAssistant?: boolean | undefined,
-        /**
-         * sub tree container nodes array, property only for the root node, default value undefined
-         */
-        stContainerNodes?: Array<node> | undefined,
-        /**
-         * it is set only if you define order option, default value undefined
-         */
-        order?: number | undefined,
-        /**
-         * true if the node is collpased, false if it is not and undefined if not initalized
-         */
-        collapsed?: boolean | undefined,
-        /**
-         * a level of the node starting from zero
-         */
-        level?: number,
-        /**
-         * true if the node is minimized, default value undefined
-         */
-        min?: boolean | undefined,
-        /**
-         * sub levels, default value undefined
-         */
-        subLevels?: number | undefined,
-        /**
-         * set only if the node contains sub trees and padding is defined in the template, default value undefined
-         */
-        padding?: number | undefined,
-        /**
-         * layout configuration name, default value undefined
-         */
-        lcn?: string | undefined,
-        /**
-         * for assistant nodes and mixed layout we create dynamic nodes called splits, default value undefined
-         */
-        isSplit?: boolean | undefined
-    }
+    
 
     interface options  {
         /**
@@ -2116,6 +2015,126 @@ declare class FamilyTreeBase {
 
 
 declare namespace FamilyTree {
+    interface node {
+        /**
+         * the same id you provided in the source node
+         */
+        id?: string | number,
+        /**
+         * father id - same fid you provided in the source node, the default value is null if not provided or if node with the same id does not exist
+         */
+        fid?: string | number,
+                /**
+         * mother id - same fid you provided in the source node, the default value is null if not provided or if node with the same id does not exist
+         */
+        mid?: string | number,
+        /**
+         *  partner parent id, it is the partner parent node id of the partner node, it is the same ppid you provided in the source node, the default value is undefined.
+         */
+        ppid?: string | number,
+        /**
+         * a reference to the parent node, default value is null, if the nodes is collapse this proprty is not initalized and can be null even if pid is not null
+         */
+        parent?: node,
+        /**
+         * ub tree parent id, it is the parent node id of the root node of the sub tree, it is the same stpid you provided in the source node, the default value is null if not provided or if node with the same id does not exist.
+         */
+        stpid?: string | number,
+        /**
+         * - a reference to the parent node of a sub tree, default value is null, if the parent node is minimized this proprty is not initalized and can be null even if we have stpid
+         */
+        stParent?: node,
+        isPartner?: boolean,
+        partnerSeparation?: number,
+        /**
+         * array of ids, always initialized
+         */
+        childrenIds?: Array<string | number>,
+        /**
+         * array of children nodes, initialized on demand if all children are collpased it will be empty array
+         */
+        children?: Array<node>,
+        /**
+         * array of sub tree children root node ids, always initialized
+         */
+        stChildrenIds?: Array<string | number>,
+        /**
+         * array of sub tree children root nodes, initialized on demand if the node is minimized it will be empty array
+         */
+        stChildren?: Array<node>,
+        /**
+         * array of string values, the same array you provided in the source node
+         */
+        tags?: Array<string>,
+        /**
+         * template name, you can specify multiple templates with tags in one chart
+         */
+        templateName?: string,
+        /**
+         * a reference to the left node neighbor, the default value is undefined
+         */
+        leftNeighbor?: node | undefined,
+        /**
+         *  a reference to the right node neighbor, the default value is undefined
+         */
+        rightNeighbor?: node | undefined,
+        /**
+         * x position, default value undefined
+         */
+        x?: number | undefined,
+        /**
+         *  y position, default value undefined
+         */
+        y?: number | undefined,
+        /**
+         * width of the node, default value undefined
+         */
+        w?: number | undefined,
+        /**
+         * height of the node, default value undefined
+         */
+        h?: number | undefined,
+        /**
+         * if the node is assistant is true if not false if the node is not initialized is undefined
+         */
+        isAssistant?: boolean | undefined,
+        /**
+         * sub tree container nodes array, property only for the root node, default value undefined
+         */
+        stContainerNodes?: Array<node> | undefined,
+        /**
+         * it is set only if you define order option, default value undefined
+         */
+        order?: number | undefined,
+        /**
+         * true if the node is collpased, false if it is not and undefined if not initalized
+         */
+        collapsed?: boolean | undefined,
+        /**
+         * a level of the node starting from zero
+         */
+        level?: number,
+        /**
+         * true if the node is minimized, default value undefined
+         */
+        min?: boolean | undefined,
+        /**
+         * sub levels, default value undefined
+         */
+        subLevels?: number | undefined,
+        /**
+         * set only if the node contains sub trees and padding is defined in the template, default value undefined
+         */
+        padding?: number | undefined,
+        /**
+         * layout configuration name, default value undefined
+         */
+        lcn?: string | undefined,
+        /**
+         * for assistant nodes and mixed layout we create dynamic nodes called splits, default value undefined
+         */
+        isSplit?: boolean | undefined
+    }
     interface template {
         nodeTreeMenuButton: string,
         nodeTreeMenuCloseButton: string
