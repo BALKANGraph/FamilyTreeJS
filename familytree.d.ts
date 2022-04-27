@@ -343,6 +343,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * family.onField((args) => {
      *      //return false; to cancel
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -376,6 +377,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * var family = new FamilyTree('#tree', {});
      * family.onInit(() => {
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -390,6 +392,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * var family = new FamilyTree('#tree', {});
      * family.onRedraw(() => {
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -403,6 +406,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * family.onExpandCollpaseButtonClick(() => {
      *  //return false; to cancel the operation
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -429,6 +433,7 @@ declare class FamilyTree extends FamilyTreeBase {
      *  args.styles += '<link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">';
      *  //return false; to cancel the operation
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -485,6 +490,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * family.onExportEnd(() => {
      *  //return false; to cancel the operation for example id you prefer the exported document to not download
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -544,6 +550,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * family.onNodeClick(() => {
      *  //return false; to cancel the operation      
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
@@ -565,6 +572,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * family.onNodeDoubleClick(() => {
      *  //return false; to cancel the operation 
      * });
+     * family.load(nodes);
      * ```
      * @category Event Listeners
      * @param listener 
