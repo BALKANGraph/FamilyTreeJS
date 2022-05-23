@@ -650,6 +650,11 @@ declare class FamilyTree extends FamilyTreeBase {
     
 
     static events: {
+        /**
+         * node-created and layout event listeners are obsolete use node-initialized or node-layout instead
+         * @param type 
+         * @param listener 
+         */
         on(type: "node-created" | "layout", listener: (args: any, args1: any, args2: any) => void): void
     };
     static state: { clear(stateName: string): void };
@@ -1000,6 +1005,14 @@ declare namespace FamilyTree {
         find(value: string): void;
         createItem(img: string, id: string | number, first: string, second: string): string;
     }
+
+    
+    interface filterUI {
+        init(instance: FamilyTree): void;   
+        update(): void;
+        addFilterTag(data: object): boolean;
+    }
+
 
     interface menuUI {
         init(obj: FamilyTree, menu: { [key: string]: menu }): void;
@@ -1798,7 +1811,21 @@ declare namespace FamilyTree {
           * });
           * ```      
           */
-        orderBy?: string,
+        orderBy?: string | Array<FamilyTree.orderBy>,
+        /**
+          * Filter the FamilyTree by the specified fields.
+          * ```typescript       
+          * var family = new FamilyTree('#tree', {
+          *   filterBy: 'all'
+          * });
+          * ```    
+          * ```typescript       
+          * var family = new FamilyTree('#tree', {
+          *   filterBy: ['country', 'title']
+          * });
+          * ```      
+          */
+        filterBy?: string | Array<string> | boolean,
         /**
           * @ignore
           */
@@ -1807,6 +1834,10 @@ declare namespace FamilyTree {
           * @ignore
           */
         searchUI?: FamilyTree.searchUI,
+        /**
+          * @ignore
+          */
+        filterUI?: FamilyTree.filterUI,        
         /**
           * @ignore
           */
@@ -2098,7 +2129,7 @@ declare class FamilyTreeBase {
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
      */
-     on(type: "init" | "add" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
+     on(type: "init" | "add" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple" | "node-initialized" | "node-layout", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
 
     /**
      * Occurs when the node data has been updated, removed or added.
