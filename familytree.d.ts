@@ -2083,12 +2083,24 @@ declare class FamilyTreeBase {
      * Adds child and partner 
      * @param id id of the existing partner node
      * @param childData child data 
-     * @param parentData partner data
+     * @param partnerData partner data
      * @param callback called at the end of the animation
      * @param fireEvent indicates if the update event will be called or not
      * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
      */
-    addChildAndPartnerNodes(id: string | number, childData: object, parentData: object, callback?: () => void, fireEvent?: boolean): void;
+    addChildAndPartnerNodes(id: string | number, childData: object, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
+
+    /**
+     * 
+     * @param id id of the existing partner node
+     * @param childId id of the child node
+     * @param partnerData partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    addPartnerAndParentNodes(id: string | number, childId: string | number, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
+
 
     /**
      * Adds partner node
