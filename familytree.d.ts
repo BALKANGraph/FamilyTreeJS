@@ -1522,7 +1522,7 @@ declare namespace FamilyTree {
          * ```
          * {@link https://balkan.app/FamilyTreeJS/Docs/MinMax | See doc...}
          */
-        min?: false,
+        min?: boolean,
         /**
          * Node binding in Family Tree JS maps node data to node template parameters.
          * ```typescript     
