@@ -277,10 +277,23 @@ declare class FamilyTree extends FamilyTreeBase {
     exportPNGProfile(options: FamilyTree.exportOptions, callback?: () => void): void;
     /**
      * Exports to CSV
-     * @param id if not defained exports all nodes if defined exports childrens
+     * @param filename The name of the exported file
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
      */
-    exportCSV(id?: string | number): void;
+    exportCSV(filename: string): void;
+    /**
+     * Exports to XML   
+     * @param filename The name of the exported file
+     * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
+     */
+    exportXML(filename: string): void;
+    /**
+     * Exports to JSON   
+     * @param filename The name of the exported file
+     * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
+     */
+     exportJSON(filename: string): void;
+
     /**
      * Shares node data, uses build-in  device sharing functionallity.
      * @param id node id 
@@ -317,7 +330,14 @@ declare class FamilyTree extends FamilyTreeBase {
      * Imports XML file.
      * {@link https://balkan.app/FamilyTreeJS/Docs/Importing | See doc...}       
      */    
-    importXML(filename?: string): void;
+    importXML(): void;
+
+    /**
+     * Imports JSON file.
+     * {@link https://balkan.app/FamilyTreeJS/Docs/Importing | See doc...}       
+     */    
+    importJSON(): void;
+
     /**
      * Zoom out or zoom in the family.
      * @param delta true for zoom in, false for zoom out or scale number, if scale is > 1 it will zoom in and scale < 1 zoom out.
