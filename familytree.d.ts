@@ -790,6 +790,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * Hides the Edit Form when the family is moved with pan
      */
     static HIDE_EDIT_FORM_ON_PAN: boolean;
+    static ARRAY_FIELDS: Array<string>;
 
     /**
     * @ignore
