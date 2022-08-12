@@ -3,6 +3,7 @@
 declare class FamilyTree extends FamilyTreeBase {
     nodes: { [key in any]: FamilyTree.node };
     isVisible: boolean;
+    visibleNodeIds: Array<number | string>;
 
     /**
      * @param element HTML element or string selector for example '#tree'
@@ -142,7 +143,7 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Centers specified node on the screen.
      * @param nodeId the id of the node
-     * @param options { parentState: FamilyTree.COLLAPSE_PARENT_NEIGHBORS, childrenState: FamilyTree.COLLAPSE_SUB_CHILDRENS, rippleId: rippleId, vertical: false, horizontal: false });
+     * @param options parentState: FamilyTree.COLLAPSE_PARENT_NEIGHBORS, childrenState: FamilyTree.COLLAPSE_SUB_CHILDRENS, rippleId: rippleId, vertical: false, horizontal: false
      * @param callback called when the animation completes
      */
     center(nodeId: string | number, options?: {
@@ -804,6 +805,7 @@ declare class FamilyTree extends FamilyTreeBase {
     static elements: any;
 
     static expcollOpenTag: any;
+    static upOpenTag: any;
     static grCloseTag: any;
 }
 
@@ -1083,7 +1085,7 @@ declare namespace FamilyTree {
          * @param nodeId 
          * @param menu 
          */
-        show(nodeId: string | number, menu: { [key: string]: menu }): void;
+        show(nodeId: string | number, menu?: { [key: string]: menu }): void;
         /**
          * Hides circle menu 
          */
@@ -1828,7 +1830,7 @@ declare namespace FamilyTree {
           * ```    
           * ```typescript       
           * var family = new FamilyTree('#tree', {
-          *   orderBy: [field: "orderId", desc: true],
+          *   orderBy: {field: "orderId", desc: true},
           *   nodes: [
           *       { id: 10, pid: 1, orderId: 2 },
           *       { id: 11, pid: 1, orderId: 1 }
