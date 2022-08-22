@@ -799,6 +799,11 @@ declare class FamilyTree extends FamilyTreeBase {
     static CSV_DELIMITER: string;
 
     /**
+     * 
+     */
+    static EDITFORM_CLOSE_BTN: string;
+
+    /**
     * @ignore
     */
     static element: HTMLElement;
