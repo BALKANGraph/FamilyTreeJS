@@ -626,8 +626,10 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param node 
      * @param count 
      */
-    static childrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
-    static collapsedChildrenCount(family: FamilyTree, node: FamilyTree.node, count?: number): number;
+    static childrenCount(family: FamilyTree, node: FamilyTree.node): number;
+    static childrenTotalCount(family: FamilyTree, node: FamilyTree.node): number;
+    static collapsedChildrenCount(family: FamilyTree, node: FamilyTree.node): number;
+    static collapsedChildrenTotalCount(family: FamilyTree, node: FamilyTree.node): number;
     static getRootOf(node: FamilyTree.node): FamilyTree.node;
 
     /**
@@ -802,6 +804,10 @@ declare class FamilyTree extends FamilyTreeBase {
      * 
      */
     static EDITFORM_CLOSE_BTN: string;
+    /**
+     * Escape HTML to prevent Cross-site scripting (also known as XSS) attacks 
+     */
+    static ESCAPE_HTML: string;
 
     /**
     * @ignore
