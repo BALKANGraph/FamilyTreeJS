@@ -1115,6 +1115,13 @@ declare namespace FamilyTree {
         on(type: "click" | "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: any, args1: any, args2: any) => void | boolean): circleMenuUI;
     }
 
+    interface keyNavigation {
+        /**
+         * Set focus to specified id on initial load
+         */
+        focusId: number | string
+    }
+
     interface toolbarUI {
         init(obj: FamilyTree, toolbar: toolbar): void;
         showLayout(): void;
@@ -1322,12 +1329,15 @@ declare namespace FamilyTree {
          * Enable keyboard navigation. Use "f" for find, arrows and space to navigate in the family. Default value - *false*.
          * ```typescript     
          * var family = new FamilyTree('#tree', {
-         *      enableKeyNavigation: true
+         *      keyNavigation: true
+         * });
+         * var family = new FamilyTree('#tree', {
+         *      keyNavigation: { focusId: 5 }
          * });
          * ```
          * {@link https://balkan.app/FamilyTreeJS/Docs/KeyNavigation | See doc...}
          */
-        enableKeyNavigation?: boolean,
+         keyNavigation?: boolean | FamilyTree.keyNavigation,
         /**
          * Shows mini map over the expanded tree. Default value - *false*.
          * ```typescript     
