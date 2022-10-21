@@ -2105,6 +2105,8 @@ declare namespace FamilyTree {
 
 declare class FamilyTreeBase {
 
+    nodeTreeMenu?: boolean;
+
     static icon: {
         png: (w: string| number, h: string | number, c: string) => string,
         pdf: (w: string | number| number, h: string | number, c: string) => string,
