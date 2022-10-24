@@ -614,7 +614,7 @@ declare class FamilyTree extends FamilyTreeBase {
     toolbarUI: FamilyTree.toolbarUI;    
     config: FamilyTree.options
 
-    static fileUploadDialog(callback: (file: any) => void): void;
+    static fileUploadDialog(args: Object, callback: (file: any) => void): void;
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
