@@ -614,7 +614,7 @@ declare class FamilyTree extends FamilyTreeBase {
     toolbarUI: FamilyTree.toolbarUI;    
     config: FamilyTree.options
 
-    static fileUploadDialog(args: Object, callback: (file: any) => void): void;
+    static fileUploadDialog(callback: (file: any) => void): void;
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
@@ -1058,6 +1058,15 @@ declare namespace FamilyTree {
     interface filterUI {
         init(instance: FamilyTree): void;   
         update(): void;
+        /**
+         * Opens filter Tab 
+         * @param filterTabName the name of the filter tab
+         */
+        show(filterTabName): void;
+        /**
+         * Hides the filter tabs
+         */
+        hide(): void;
         addFilterTag(data: object): boolean;
     }
 
@@ -1901,8 +1910,19 @@ declare namespace FamilyTree {
           *   filterBy: ['country', 'title']
           * });
           * ```      
+          * ```typescript       
+          * var family = new FamilyTree('#tree', {
+          *   filterBy: {
+          *         name: { 'name 2': { checked: false, text: 'My text 2'} },
+          *         title: {}
+          *   }
+          * });
+          * ```      
           */
-        filterBy?: string | Array<string> | boolean,
+        filterBy?: string | Array<string> | {[key: string]: { [key: string] : {
+            checked: boolean,
+            text?: string
+        } }},
         /**
           * @ignore
           */
