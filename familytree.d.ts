@@ -32,7 +32,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * Gets node data.
      * @param id identification number of the node
      */
-    get(id: string | number): object;
+    get(id: string | number): FamilyTree.node;
     /**
      * If specified node has assistant/s or partner/s as children will return false.
      * @param id identification number of the node
@@ -638,7 +638,8 @@ declare class FamilyTree extends FamilyTreeBase {
      */
     static isNEU(val: any): boolean;
     static gradientCircleForDefs(id: string | number, colors: Array<string> | string, r: number, strokeWidth: number): string;
-    static convertCsvToNodes(text: string) : Array<FamilyTree.node>;
+    static convertCsvToNodes(text: string) : Array<Object>;
+    static convertNodesToCsv(nodes: Array<Object>) : string;
     static wrapText(text: string, field: Object): string;
     /**
      * Shows/hides lloading image. Usefull when export large data to pdf. You can override and show your own loading image.
@@ -728,9 +729,13 @@ declare class FamilyTree extends FamilyTreeBase {
     */
     static STRING_TAGS: boolean;
     /**
-    * @ignore
-    */
+     * Search placeholder
+     */
     static SEARCH_PLACEHOLDER: string;
+    /**
+     * Search help symbol. 
+     */
+    static SEARCH_HELP_SYMBOL: string;
     /**
     * @ignore
     */
@@ -1020,7 +1025,7 @@ declare namespace FamilyTree {
          * @param detailsMode If true the edit form is in read only mode
          * @param dontAnim 
          */
-        show(id: string | number, detailsMode: boolean, dontAnim?: boolean): void;
+        show(id: string | number, detailsMode?: boolean, dontAnim?: boolean): void;
         /**
          * Hides the edit form
          */
@@ -1052,6 +1057,8 @@ declare namespace FamilyTree {
          */
         find(value: string): void;
         createItem(img: string, id: string | number, first: string, second: string): string;
+        helpView(): string;
+        addMatchTag(id: string | number) : boolean;
     }
 
     
@@ -1673,6 +1680,19 @@ declare namespace FamilyTree {
          * {@link https://balkan.app/FamilyTreeJS/Docs/Search | See doc...}
          */
         searchFieldsWeight?: { [key: string]: number },
+    	/**
+         * Search in field with abbreviation.
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *   searchFiledsAbbreviation: {
+         *       "n": "name", 
+         *       "a": "My Address" 
+         *   }
+         * });
+         * ```
+         * {@link https://balkan.app/FamilyTreeJS/Docs/Search | See doc...}
+         */
+         searchFiledsAbbreviation?: { [key: string]: string },
         /**
          * Array of node data JSON objects. nodes option is the data source of the family. Node JSON objects could have unlimited number of properties, id, pid, ppid, stpid and tags are reserved node properties.
          * - id - unique identifier, it clould be integer or string
@@ -2129,8 +2149,6 @@ declare namespace FamilyTree {
 }
 
 declare class FamilyTreeBase {
-
-    nodeTreeMenu?: boolean;
 
     static icon: {
         png: (w: string| number, h: string | number, c: string) => string,
