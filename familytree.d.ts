@@ -614,7 +614,7 @@ declare class FamilyTree extends FamilyTreeBase {
     toolbarUI: FamilyTree.toolbarUI;    
     config: FamilyTree.options
 
-    static fileUploadDialog(args: Object, callback: (file: any) => void): void;
+    static fileUploadDialog(callback: (file: any) => void): void;
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
@@ -736,6 +736,11 @@ declare class FamilyTree extends FamilyTreeBase {
      * Search help symbol. 
      */
     static SEARCH_HELP_SYMBOL: string;
+
+    /**
+     * Close search result list by click outside list and clean search input 
+     */
+    static SEARCH_CLOSE_RESULT_ON_ESCAPE_OR_CLICKOUTSIDE: boolean;
     /**
     * @ignore
     */
