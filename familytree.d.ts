@@ -369,7 +369,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */
-    onField(listener: (args: { 
+    onField(listener: (this: FamilyTree, args: { 
         /**
          * the node
          */
@@ -403,7 +403,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */
-    onInit(listener: () => void): FamilyTree;
+    onInit(listener: (this: FamilyTree) => void): FamilyTree;
     
 
 
@@ -418,7 +418,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */        
-    onRedraw(listener: () => void): FamilyTree;
+    onRedraw(listener: (this: FamilyTree) => void): FamilyTree;
 
     /**
      * The onExpandCollpaseButtonClick event occurs when the family is redrawed.
@@ -432,7 +432,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */         
-    onExpandCollpaseButtonClick(listener: (args: {
+    onExpandCollpaseButtonClick(listener: (this: FamilyTree, args: {
         /**
          * Indicates id the operation is collaps or expand
          */
@@ -459,7 +459,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */             
-    onExportStart(listener: (args: 
+    onExportStart(listener: (this: FamilyTree, args: 
         {
         /**
          * the content to be exported
@@ -516,7 +516,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */         
-    onExportEnd(listener: (args: 
+    onExportEnd(listener: (this: FamilyTree, args: 
         /**
          * for PDF/PNG
          */
@@ -576,7 +576,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */   
-    onNodeClick(listener: (args: {
+    onNodeClick(listener: (this: FamilyTree, args: {
         /**
          * node JSON object
          */
@@ -598,7 +598,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */       
-    onNodeDoubleClick(listener: (args: {
+    onNodeDoubleClick(listener: (this: FamilyTree, args: {
         /**
          * clicked node data
          */
@@ -2276,7 +2276,7 @@ declare class FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */
-    onUpdateNode(listener: (args: {
+    onUpdateNode(listener: (this: FamilyTree, args: {
         addNodesData: Array<object>,
         updateNodesData: Array<object>,
         removeNodeId: number | string
@@ -2292,7 +2292,7 @@ declare class FamilyTreeBase {
      * @category Event Listeners
      * @param listener 
      */
-    onNodeTreeMenuShow(listener: (args: {
+    onNodeTreeMenuShow(listener: (this: FamilyTree, args: {
         nodes: Array<object>,
         node: object
     }) => void): FamilyTree;
