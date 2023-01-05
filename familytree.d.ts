@@ -608,6 +608,7 @@ declare class FamilyTree extends FamilyTreeBase {
     editUI: FamilyTree.editUI;
     searchUI: FamilyTree.searchUI;
     nodeMenuUI: FamilyTree.menuUI;
+    filterUI: FamilyTree.filterUI;
     nodeCircleMenuUI: FamilyTree.circleMenuUI;
     nodeContextMenuUI: FamilyTree.menuUI;
     menuUI: FamilyTree.menuUI;
@@ -1080,6 +1081,7 @@ declare namespace FamilyTree {
          */
         hide(): void;
         addFilterTag(data: object): boolean;
+        filterBy?: any;
     }
 
 
