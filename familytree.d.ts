@@ -605,6 +605,8 @@ declare class FamilyTree extends FamilyTreeBase {
         data: object
     }) => void): FamilyTree;
 
+    element: HTMLElement;
+
     editUI: FamilyTree.editUI;
     searchUI: FamilyTree.searchUI;
     nodeMenuUI: FamilyTree.menuUI;
