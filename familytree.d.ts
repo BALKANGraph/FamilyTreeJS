@@ -1188,6 +1188,7 @@ declare namespace FamilyTree {
         height?: Number,
         padding?: Number,
         position?: FamilyTree.position,
+        draggable?: boolean
     }
 
     interface position  {
