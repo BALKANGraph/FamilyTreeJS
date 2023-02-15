@@ -2227,7 +2227,7 @@ declare class FamilyTreeBase {
      * @param fireEvent indicates if the update event will be called or not
      * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
      */
-    addPartnerAndParentNodes(id: string | number, childId: string | number, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
+    addPartnerAndParentNodes(id: string | number, childIds: Array<string | number>, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
 
 
     /**
