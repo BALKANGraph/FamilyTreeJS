@@ -830,7 +830,6 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
     * @ignore
     */
-    static element: HTMLElement;
 
     static randomId(): any;
     static searchUI: any;
@@ -1044,6 +1043,7 @@ declare namespace FamilyTree {
          * @param avatarUrl avatar url
          */
         setAvatar(avatarUrl?: string): void;
+        // static renderHeaderContent(title: string, photo: string, node: FamilyTree.node, data: object): string;        
     }
 
     interface searchUI {
@@ -1366,6 +1366,16 @@ declare namespace FamilyTree {
          * ```
          */
         enableSearch?: boolean,
+        
+        /**
+         * You can disable family pan. Default value - *true*.
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *      enablePan: false
+         * });
+         * ```
+         */
+        enablePan?: boolean,
 
         /**
          * Enable touch instead of mouse for particular devices with touchscreen/touchpad/trackpad. Default value - *false*.
@@ -1375,6 +1385,7 @@ declare namespace FamilyTree {
          * });
          * ```
          */
+        
         enableTouch?: boolean,
         /**
          * Enable keyboard navigation. Use "f" for find, arrows and space to navigate in the family. Default value - *false*.
@@ -2221,7 +2232,7 @@ declare class FamilyTreeBase {
     /**
      * 
      * @param id id of the existing partner node
-     * @param childId id of the child node
+     * @param childIds ids of the child nodes
      * @param partnerData partner data
      * @param callback called at the end of the animation
      * @param fireEvent indicates if the update event will be called or not
