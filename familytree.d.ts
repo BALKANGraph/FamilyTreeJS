@@ -1248,6 +1248,11 @@ declare namespace FamilyTree {
         template?: string,
         label?: string
     }
+    interface dottedLine {
+        from?: string | number,
+        to?: string | number,
+        tags?: Array<string>
+    }
     interface orderBy {
         field?: string,
         desc?: boolean
@@ -1759,6 +1764,31 @@ declare namespace FamilyTree {
          * ```
          */
         slinks?: Array<FamilyTree.link>,
+
+         /**
+         * Adds dotted line.
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *   dottedLines: [
+         *       {from: 6, to: 1 }
+         *   ]
+         * });
+         * ```
+         */
+        dottedLines?: Array<FamilyTree.dottedLine>,
+
+         /**
+         * Adds group dotted line.
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *   groupDottedLines: [
+         *       {from: 6, to: 1 }
+         *   ]
+         * });
+         * ```
+         */
+        groupDottedLines?: Array<FamilyTree.dottedLine>,
+
         /**
          * The gap between each level. Default value - *60*
          * ```typescript     
