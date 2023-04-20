@@ -617,7 +617,7 @@ declare class FamilyTree extends FamilyTreeBase {
     toolbarUI: FamilyTree.toolbarUI;    
     config: FamilyTree.options
 
-    static fileUploadDialog(args: Object, callback: (file: any) => void): void;
+    static fileUploadDialog(scallback: (file: any) => void): void;
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
@@ -1067,6 +1067,9 @@ declare namespace FamilyTree {
         createItem(img: string, id: string | number, first: string, second: string): string;
         helpView(): string;
         addMatchTag(id: string | number) : boolean;
+        input: HTMLElement;
+        searchTableWrapper: HTMLElement; 
+        lastSearch: Array<object>;        
     }
 
     
