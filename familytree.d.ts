@@ -1664,7 +1664,7 @@ declare namespace FamilyTree {
          * Link binding in Family Tree JS maps node data to link template parameters.
          * ```typescript     
          * var family = new FamilyTree('#tree', {
-         *   nodeBinding: {
+         *   linkBinding: {
          *       link_field_0: "createdAt"
          *   },
          *   nodes: [
