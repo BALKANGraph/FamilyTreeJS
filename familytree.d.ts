@@ -84,8 +84,9 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Load nodes data.
      * @param data node data array
+     * @param callback function called after the load
      */
-    load(data: Array<object>): FamilyTree;
+    load(data: Array<object>, callback?: () => void): FamilyTree;
 
     /**
      * Updates the node data, redraws the family and fires update event.
@@ -98,8 +99,9 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
      * Loads nodes from xml.
      * @param xml Xml with node structure
+     * @param callback function called after the load
      */
-    loadXML(xml: string): FamilyTree;
+    loadXML(xml: string, callback?: () => void): FamilyTree;
     /**
      * Gets nodes as xml.
      */
@@ -281,19 +283,19 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param filename The name of the exported file
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
      */
-    exportCSV(filename: string): void;
+    exportCSV(filename: string | FamilyTree.exportCSVXMLJSONOptions): void;
     /**
      * Exports to XML   
      * @param filename The name of the exported file
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
      */
-    exportXML(filename: string): void;
+    exportXML(filename: string | FamilyTree.exportCSVXMLJSONOptions): void;
     /**
      * Exports to JSON   
      * @param filename The name of the exported file
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}            
      */
-     exportJSON(filename: string): void;
+     exportJSON(filename: string | FamilyTree.exportCSVXMLJSONOptions ): void;
 
     /**
      * Shares node data, uses build-in  device sharing functionallity.
@@ -775,10 +777,6 @@ declare class FamilyTree extends FamilyTreeBase {
     /**
     * @ignore
     */
-    static MOVE_INTERVAL: number;
-    /**
-    * @ignore
-    */
     static CLINK_CURVE: number;
     /**
     * @ignore
@@ -1211,6 +1209,13 @@ declare namespace FamilyTree {
         header?: string,
         footer?: string,
         openInNewTab?: boolean,
+        expandChildren?: boolean,
+        min?: boolean,
+        nodeId? : number | string
+    }
+
+    interface exportCSVXMLJSONOptions  {
+        filename?: string,
         expandChildren?: boolean,
         min?: boolean,
         nodeId? : number | string
