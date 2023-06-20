@@ -357,7 +357,21 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param front show on front or back 
      * @param anim animation type
      */
-     magnify(id: string | number, scale: number, front?: boolean, anim?: FamilyTree.anim | null, callback?: () => void): void;
+     magnify(id: string | number, scale: number, front?: boolean, anim?: FamilyTree.anim | null, callback?: () => void): void;     
+
+    /**
+     * Starts the move 
+     * @param movePosition move position
+     * @param tick callback function in each step
+     * @param func the name of the animation function, for example FamilyTree.anim.inSin
+     * @param duration duration before going to 100 percent speed
+     */
+    moveStart(movePosition: FamilyTree.move, tick?: () => void, func?: FamilyTree.anim, duration?: number): void;
+    
+    /**
+     * Ends the move
+     */
+    moveEnd(): void;
 
     /**
      * The onField() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.
