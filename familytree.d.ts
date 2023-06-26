@@ -1279,6 +1279,13 @@ declare namespace FamilyTree {
         field?: string,
         desc?: boolean
     }
+    interface move {
+        left?: boolean,
+        right?: boolean,
+        up?: boolean,
+        down?: boolean,
+    }
+
     enum orientation {
         top,
         bottom,
