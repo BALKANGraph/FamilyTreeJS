@@ -405,7 +405,11 @@ declare class FamilyTree extends FamilyTreeBase {
         /**
          * name of the field
          */
-        name: string 
+        name: string         
+        /**
+         * field template name
+         */
+        field: string 
     }) => void | boolean): FamilyTree;
 
     /**
