@@ -785,6 +785,10 @@ declare class FamilyTree extends FamilyTreeBase {
     */
     static MIXED_LAYOUT_FOR_NODES_WITH_COLLAPSED_CHILDREN: boolean;
     /**
+    * Use mixed layout for example tree or treeLeftOffset if number of children is more then specified value
+    */
+    static MIXED_LAYOUT_IF_NUMBER_OF_CHILDREN_IS_MORE_THEN: boolean;
+    /**
     * @ignore
     */
     static LINK_ROUNDED_CORNERS: number;
@@ -849,6 +853,7 @@ declare class FamilyTree extends FamilyTreeBase {
 
     static randomId(): any;
     static searchUI: any;
+    static editUI: any;
     static attr: any;
     static toolbarUI: any;
     static elements: any;
@@ -1124,6 +1129,11 @@ declare namespace FamilyTree {
          */
         showStickIn(stickToElement: HTMLElement, firstNodeId: string | number, secondNodeId: string | number, menu: { [key: string]: menu }): void;
         /**
+         * Returns true if the menu is visible
+         */
+        isVisible(): boolean;
+
+        /**
          * Hieds the menu
          */
         hide(): void;
@@ -1305,7 +1315,9 @@ declare namespace FamilyTree {
         mixed,
         tree,
         treeLeftOffset,
-        treeRightOffset
+        treeRightOffset,
+        treeLeft,
+        treeRight
     }
 
     enum align {
@@ -1938,6 +1950,8 @@ declare namespace FamilyTree {
          * - FamilyTree.layout.tree
          * - FamilyTree.layout.treeLeftOffset
          * - FamilyTree.layout.treeRightOffset
+         * - FamilyTree.layout.treeLeft
+         * - FamilyTree.layout.treeRight
          * 
          * Default value - *FamilyTree.layout.normal*
          * ```typescript     
