@@ -854,6 +854,7 @@ declare class FamilyTree extends FamilyTreeBase {
     static randomId(): any;
     static searchUI: any;
     static editUI: any;
+    static pdfPrevUI: any;
     static attr: any;
     static toolbarUI: any;
     static elements: any;
