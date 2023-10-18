@@ -2397,13 +2397,12 @@ declare class FamilyTreeBase {
      * ```
      * @category Event Listeners
      * @param listener 
-     * @param finish Use it in async processes
      */
     onUpdateNode(listener: (this: FamilyTree, args: {
         addNodesData: Array<object>,
         updateNodesData: Array<object>,
         removeNodeId: number | string
-    }, finish?: () => void) => void): FamilyTree;
+    }) => void): FamilyTree;
 
     /**
      * Occurs when node tree menu button is clicked. Use this event to modify the nodes in the tree menu.
