@@ -376,7 +376,34 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param duration duration before going to 100 percent speed
      */
     moveStart(movePosition: FamilyTree.move, tick?: () => void, func?: FamilyTree.anim, duration?: number): void;
+    /**
+     * Undo data operations like adding/removing nodes. Set undoRedoStorageName option before calling this method.
+     * @param callback called when the animation completes
+     */
+    undo(callback?: () => void): void;
+    /**
+     * Redo data operations like adding/removing nodes. Set undoRedoStorageName option before calling this method.
+     * @param callback called when the animation completes
+     */
+    redo(callback?: () => void): void;
+
+    /**
+     * Clears all Redo stack steps.
+     */
+    clearRedo(): void;
     
+    /**
+     * Clears all Undo stack steps.
+     */
+    clearUndo(): void;
+    /**
+     * Returns the number of Undo stack steps
+     */
+    undoStepsCount(): number;
+    /**
+     * Returns the number of Redo stack steps
+     */    
+    redoStepsCount(): number;    
     /**
      * Ends the move
      */
@@ -1209,6 +1236,21 @@ declare namespace FamilyTree {
          * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
          */        
         on(type: "click" | "show" | "drag" | "drop" | "mouseenter" | "mouseout", listener: (sender: circleMenuUI, args: any, args1: any, args2: any) => void | boolean): circleMenuUI;
+    }
+
+    interface undoRedoUI {
+        /**
+         * Inits undoRedoUI
+         * @param instance 
+         */
+        init(instance: FamilyTree): void;
+        /**
+         * Refreshes the UI buttonss
+         */
+        refresh(): void;
+        undoElement: HTMLElement;
+        redoElement: HTMLElement;
+        instance: FamilyTree;
     }
 
     interface keyNavigation {
@@ -2125,6 +2167,10 @@ declare namespace FamilyTree {
         menuUI?: FamilyTree.menuUI,
         /**
          * @ignore
+         */      
+        undoRedoUI?: FamilyTree.undoRedoUI,
+        /**
+         * @ignore
          */
          UI?: any,        
         /**
@@ -2240,6 +2286,10 @@ declare namespace FamilyTree {
             readFromUrlParams?: boolean,
             writeToUrlParams?: boolean
         },
+        /**
+         * Set the session storage name to use undo/redo functionallity.
+         */
+        undoRedoStorageName?: string,
         /**
          * Configure the buildin edit form.
          * {@link https://balkan.app/FamilyTreeJS/Docs/Edit | See doc...}   
