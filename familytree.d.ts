@@ -667,6 +667,7 @@ declare class FamilyTree extends FamilyTreeBase {
     searchUI: FamilyTree.searchUI;
     nodeMenuUI: FamilyTree.menuUI;
     filterUI: FamilyTree.filterUI;
+    undoRedoUI: FamilyTree.undoRedoUI;
     nodeCircleMenuUI: FamilyTree.circleMenuUI;
     nodeContextMenuUI: FamilyTree.menuUI;
     menuUI: FamilyTree.menuUI;
@@ -1248,8 +1249,31 @@ declare namespace FamilyTree {
          * Refreshes the UI buttonss
          */
         refresh(): void;
-        undoElement: HTMLElement;
-        redoElement: HTMLElement;
+        /** 
+         * @ignore
+         */
+        on(type: "change", listener: (sender: undoRedoUI, args: any) => void | boolean): undoRedoUI;
+        /**
+         * Occurs when the undo redo buttons needs to updated.
+         *  ```typescript     
+         * var family = new FamilyTree('#tree', {});
+         * family.undoRedoUI.onChange((args) => {
+         * //return false; to cancel the operation
+         * });
+         * ```
+         * @category Event Listeners
+         * @param listener 
+         */
+        onChange(listener: (args: {
+            /**
+             * Undo stack steps count
+             */
+            undoStepsCount: number,
+            /**
+             * Redo stack steps count
+             */
+            redoStepsCount: number
+        }) => void): undoRedoUI;
         instance: FamilyTree;
     }
 
