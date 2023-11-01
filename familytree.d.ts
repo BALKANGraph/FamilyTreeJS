@@ -2468,7 +2468,7 @@ declare class FamilyTreeBase {
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
      */
-     on(type: "init" | "add" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "adding" | "added" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple" | "node-initialized" | "node-layout", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
+     on(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "ready" | "ripple" | "node-initialized" | "node-layout", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
 
          /**
      * Removes an event listener previously registered. The event listener to be removed is identified using a combination of the event type and the event listener function itself. Returns true if success and false if fail.
