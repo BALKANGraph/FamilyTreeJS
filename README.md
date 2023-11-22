@@ -1,7 +1,7 @@
 # ![Family Tree JS](https://balkangraph.com/content/img/icon-FamilyTreeJS.png) Family Tree JS 
 Build family tree app with BALKAN FamilyTreeJS JavaScript library. Family Tree also called a genealogy or a pedigree chart, is a chart representing family relationships in a conventional tree structure.
 
-![Family Tree JS](https://cdn.balkan.app/FamilyTreeJS/FamilyTreeJS-tommy.webp)
+![Family Tree JS](https://balkan.app/Content/Img/ft.png)
 
 
 ## [Demos](https://balkan.app/FamilyTreeJS/Demos/BasicUsage)  &nbsp;&nbsp;&nbsp;&nbsp;  [Docs](https://balkan.app/FamilyTreeJS/Docs/GettingStarted)  &nbsp;&nbsp;&nbsp;&nbsp;  [Download](https://balkan.app/FamilyTreeJS/Download) &nbsp;&nbsp;&nbsp;&nbsp;  [Support](https://balkan.app/FamilyTreeJS/Support)
