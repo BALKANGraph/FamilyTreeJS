@@ -135,6 +135,13 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param viewBox 
      */
     getScale(viewBox?: Array<number>): number;
+
+    /**
+     * Sets the current scale of the family. 
+     * Returns the actual scale limited by scaleMax and scaleMin
+     * @param newScale new scale value
+     */
+    setScale(newScale: number): number;
     /**
      * Animates specified node with ripple animation - highlight the node.
      * @param id the id of the node
@@ -1045,7 +1052,15 @@ declare namespace FamilyTree {
         /**
          * indicates if the node is child of partner node
          */
-        isChildOfPartner?: boolean
+        isChildOfPartner?: boolean,
+        /**
+         * move the the node on x axis 
+         */
+        movex?: number | undefined,
+        /**
+         * move the the node on y axis 
+         */
+        movey?: number | undefined
     }
 
 
@@ -1453,6 +1468,11 @@ declare namespace FamilyTree {
         boundary
     }
 
+    enum draggable {
+        node,
+        tree
+    }
+
 
     enum action {
         update,
@@ -1475,6 +1495,9 @@ declare namespace FamilyTree {
         scroll,
         none
     }
+
+
+    
 
     
 
@@ -1710,6 +1733,10 @@ declare namespace FamilyTree {
          * ```
          */
         showXScroll?: boolean ,
+        /**
+         * Draggable node, drag the node anywhere on the canvas
+         */
+        draggable?: FamilyTree.draggable,
         /**
          * Shows vertical scrollbar. Default value - *false*.
          * ```typescript     
