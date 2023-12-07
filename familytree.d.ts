@@ -195,8 +195,9 @@ declare class FamilyTree extends FamilyTreeBase {
      * Sets orientation.
      * @param orientation  orientation type
      * @param lcn lyout config name for the specified sub tree
+     * @param callback called at the end of animation
      */
-    setOrientation(orientation: FamilyTree.orientation, lcn?: string): void;
+    setOrientation(orientation: FamilyTree.orientation, lcn?: string, callback?: () => void): void;
     /**
      * Search in the family.
      * @param value search for value
@@ -679,7 +680,8 @@ declare class FamilyTree extends FamilyTreeBase {
     nodeContextMenuUI: FamilyTree.menuUI;
     menuUI: FamilyTree.menuUI;
     toolbarUI: FamilyTree.toolbarUI;    
-    config: FamilyTree.options
+    config: FamilyTree.options;
+    roots: Array<FamilyTree.node>;
 
     static fileUploadDialog(scallback: (file: any) => void): void;
     static isMobile(): boolean;
