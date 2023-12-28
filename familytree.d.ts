@@ -198,6 +198,15 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param callback called at the end of animation
      */
     setOrientation(orientation: FamilyTree.orientation, lcn?: string, callback?: () => void): void;
+
+
+    /**
+     * Moves specified nodes to the visible area.
+     * @param ids  Array of node ids
+     * @param callback called at the end of animation
+     */
+    moveNodesToVisibleArea(ids: Array<number | string>, callback?: () => void): void;
+
     /**
      * Search in the family.
      * @param value search for value
