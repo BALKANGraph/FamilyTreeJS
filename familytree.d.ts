@@ -1651,7 +1651,7 @@ declare namespace FamilyTree {
          */
         nodeContextMenu?: FamilyTree.menu,
         /**
-         * Enables export to excel, export to svg and other FamilyTree operations. Also you can define your own FamilyTree operation.
+         * Enables export to csv, export to svg and other FamilyTree operations. Also you can define your own FamilyTree operation.
          * ```typescript     
          * var family = new FamilyTree('#tree', {
          *      menu:{
