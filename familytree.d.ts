@@ -684,6 +684,8 @@ declare class FamilyTree extends FamilyTreeBase {
     searchUI: FamilyTree.searchUI;
     nodeMenuUI: FamilyTree.menuUI;
     filterUI: FamilyTree.filterUI;
+    xScrollUI: FamilyTree.xScrollUI;
+    yScrollUI: FamilyTree.yScrollUI;
     undoRedoUI: FamilyTree.undoRedoUI;
     nodeCircleMenuUI: FamilyTree.circleMenuUI;
     nodeContextMenuUI: FamilyTree.menuUI;
@@ -837,9 +839,13 @@ declare class FamilyTree extends FamilyTreeBase {
     */
     static FIXED_POSITION_ON_CLICK: boolean;
     /**
-    * @ignore
+    * Render links before nodes, default is false
     */
     static RENDER_LINKS_BEFORE_NODES: boolean;
+    /**
+    * Render clinks before nodes, default is false
+    */
+    static RENDER_CLINKS_BEFORE_NODES: boolean;
     /**
     * @ignore
     */
@@ -1201,6 +1207,24 @@ declare namespace FamilyTree {
         instance: FamilyTree;
     }
 
+
+    
+    
+    interface xScrollUI {
+        addListener(svg: HTMLElement): void;   
+        create(width: number): void;   
+        setPosition(width: number): void;   
+        on(type: "change", listener: (sender: xScrollUI, args: any, args1: any, args2: any) => void | boolean): xScrollUI;
+        element: HTMLElement;
+    }
+
+    interface yScrollUI {
+        addListener(svg: HTMLElement): void;   
+        create(width: number): void;   
+        setPosition(width: number): void;   
+        on(type: "change", listener: (sender: yScrollUI, args: any, args1: any, args2: any) => void | boolean): yScrollUI;
+        element: HTMLElement;
+    }
 
     interface menuUI  {
         init(obj: FamilyTree, menu: { [key: string]: menu }): void;
@@ -2198,11 +2222,11 @@ declare namespace FamilyTree {
         /**
           * @ignore
           */
-        xScrollUI?: any,
+        xScrollUI?: FamilyTree.xScrollUI,
         /**
           * @ignore
           */
-        yScrollUI?: any,
+        yScrollUI?: FamilyTree.yScrollUI,
         /**
           * @ignore
           */
