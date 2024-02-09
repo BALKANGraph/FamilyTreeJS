@@ -924,7 +924,7 @@ declare class FamilyTree extends FamilyTreeBase {
     static randomId(): any;
     static searchUI: any;
     static editUI: any;
-    static pdfPrevUI: any;
+    static pdfPrevUI: FamilyTree.pdfPrevUI;
     // static menuUI: any;
     static attr: any;
     static toolbarUI: any;
@@ -1325,6 +1325,12 @@ declare namespace FamilyTree {
             redoStepsCount: number
         }) => void): undoRedoUI;
         instance: FamilyTree;
+    }
+
+    interface pdfPrevUI {
+        show(family: FamilyTree, options: exportOptions): pdfPrevUI;
+        hide(family: FamilyTree): void;
+
     }
 
     interface keyNavigation {
