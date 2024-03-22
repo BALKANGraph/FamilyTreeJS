@@ -730,6 +730,11 @@ declare class FamilyTree extends FamilyTreeBase {
     static roundPathCorners(commands: string | Array<Array<any>>, radius: number, useFractionalRadius: boolean) : string;
     static convertNodesToCsv(nodes: Array<Object>) : string;
     static wrapText(text: string, field: Object): string;
+
+    static filterUI: {
+        textFilterBy: string
+    };
+
     /**
      * Shows/hides lloading image. Usefull when export large data to pdf. You can override and show your own loading image.
      */
@@ -916,6 +921,16 @@ declare class FamilyTree extends FamilyTreeBase {
      * Align children of assistant vertically 
      */
     static VERTICAL_CHILDREN_ASSISTANT: boolean;
+
+    /**
+    * Cut nodes when export with pages, dafault is false
+    */
+    static EXPORT_PAGES_CUT_NODES: boolean;
+
+    /**
+    * Reset movable nodes to its original position when expand or collapse
+    */
+    static RESET_MOVABLE_ONEXPANDCOLLAPSE: boolean;    
 
     /**
     * @ignore
@@ -1476,7 +1491,8 @@ declare namespace FamilyTree {
         treeLeftOffset,
         treeRightOffset,
         treeLeft,
-        treeRight
+        treeRight,
+        grid
     }
 
     enum align {
@@ -1509,9 +1525,10 @@ declare namespace FamilyTree {
         boundary
     }
 
-    enum draggable {
+    enum movable {
         node,
-        tree
+        tree,
+        detachTree
     }
 
 
@@ -1775,9 +1792,9 @@ declare namespace FamilyTree {
          */
         showXScroll?: boolean ,
         /**
-         * Draggable node, drag the node anywhere on the canvas
+         * movable node, move the node anywhere on the canvas
          */
-        draggable?: FamilyTree.draggable,
+        movable?: FamilyTree.movable,
         /**
          * Shows vertical scrollbar. Default value - *false*.
          * ```typescript     
@@ -2123,6 +2140,7 @@ declare namespace FamilyTree {
          * - FamilyTree.layout.treeRightOffset
          * - FamilyTree.layout.treeLeft
          * - FamilyTree.layout.treeRight
+         * - FamilyTree.layout.grid
          * 
          * Default value - *FamilyTree.layout.normal*
          * ```typescript     
@@ -2132,6 +2150,11 @@ declare namespace FamilyTree {
          * ```          
          */
         layout?: FamilyTree.layout | number,
+        /**
+         * Sets the maximum number of columns in grid layout, it has to be even nymber or 'dynamic' string
+         * The default id 'dynamic', that means that the maximum colomn numbers are dinamicly calculated 
+         */
+        layoutGridColumns?: string | number,
         /**
          * The scale factor determines what fraction of the entire scale is visible at one time.
          * - FamilyTree.match.height
