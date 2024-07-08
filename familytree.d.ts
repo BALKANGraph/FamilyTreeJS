@@ -44,7 +44,7 @@ declare class FamilyTree extends FamilyTreeBase {
      * @param ids node ids that will be expanded
      * @param callback called after the animation completes
      */
-    expand(id: string | number, ids: Array<string | number>, callback?: () => void): void;
+    expand(id: string | number, ids: Array<string | number> | "all", callback?: () => void): void;
     /**
      * Collapses specified nodes.
      * @param id  the id of the node that will not move
@@ -296,7 +296,6 @@ declare class FamilyTree extends FamilyTreeBase {
      * {@link https://balkan.app/FamilyTreeJS/Docs/Exporting | See doc...}        
      */
     exportPDFProfile(options: FamilyTree.exportOptions, callback?: () => void): void;
-    exportPDFPreview(options: FamilyTree.exportOptions): void;
     /**
      * Exports the details form to PDF.
      * @param options export options
@@ -933,6 +932,11 @@ declare class FamilyTree extends FamilyTreeBase {
     static RESET_MOVABLE_ONEXPANDCOLLAPSE: boolean;    
 
     /**
+    * Filter menu is ordered alphabetically
+    */
+    static FILTER_ALPHABETICALLY: boolean;   
+
+    /**
     * @ignore
     */
 
@@ -1457,6 +1461,13 @@ declare namespace FamilyTree {
         to?: string | number,
         template?: string,
         label?: string
+    }
+    interface backdrop {
+        id?: string | number,
+        levels?: number,
+        color?: string,
+        opacity?: number,
+        except?: Array<string | number>
     }
     interface dottedLine {
         from?: string | number,
@@ -1998,6 +2009,19 @@ declare namespace FamilyTree {
          */
         slinks?: Array<FamilyTree.link>,
 
+        /**
+         * Adds backdrops to the specidied nodes.
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *   backdrops: [
+         *       { id: 5, levels: 2, color: '#039BE5', opacity: 0.2 }
+         *   ]
+         * });
+         * ```
+         */
+        backdrops?: Array<FamilyTree.backdrop>,
+
+
          /**
          * Adds dotted line.
          * ```typescript     
@@ -2040,6 +2064,15 @@ declare namespace FamilyTree {
          * ```
          */
         siblingSeparation?: number,
+        /**
+         * The padding between the node and the backdrop. Default value - *15*
+         * ```typescript     
+         * var family = new FamilyTree('#tree', {
+         *   backdropSeparation: 15
+         * });
+         * ```
+         */        
+        backdropSeparation?: number,
         /**
          * The gap between subtrees. Default value - *40*
          * ```typescript     
