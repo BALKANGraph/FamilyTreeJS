@@ -752,8 +752,8 @@ declare class FamilyTree extends FamilyTreeBase {
     }
 
 
-    static templates :{ [key: string]: FamilyTree.template} ;
-
+    static templates: { [key: string]: FamilyTree.template} ;
+    
 
     static scroll: {
         visible?: boolean,
@@ -778,6 +778,18 @@ declare class FamilyTree extends FamilyTreeBase {
     static state: { clear(stateName: string): void };
 
     static animate(element: Object, attrStart?: Object, attrEnd?: Object, duration?: number, func?: FamilyTree.anim, callback?: Function, tick?: boolean): void;
+
+    static miniMap: {
+        colors: Array<string>,
+        selectorBackgroundColor: string,
+        focusStroke: string,
+        opacity: number,
+        border: string,
+        width: number,
+        height: number,
+        padding: number,
+        position: Object
+    };
 
     static VERSION: string;
     /**
