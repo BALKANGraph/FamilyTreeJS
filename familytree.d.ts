@@ -1,6 +1,156 @@
 
 
-declare class FamilyTree extends FamilyTreeBase {
+declare class FamilyTree {
+    
+    static icon: {
+        png: (w: string| number, h: string | number, c: string) => string,
+        pdf: (w: string | number| number, h: string | number, c: string) => string,
+        svg: (w: string| number, h: string| number, c: string | number) => string,
+        csv: (w: string| number, h: string| number, c: string| number) => string,
+        excel: (w: string| number, h: string| number, c: string| number) => string,
+        edit: (w: string| number, h: string| number, c: string| number) => string,
+        details: (w: string| number, h: string| number, c: string| number) => string,
+        remove: (w: string| number, h: string| number, c: string| number) => string,
+        add: (w: string| number, h: string| number, c: string| number) => string,
+        xml: (w: string| number, h: string| number, c: string| number) => string,
+        link: (w: string| number, h: string| number, c: string| number) => string,
+        happy: (w: string| number, h: string| number, c: string| number) => string,
+        sad: (w: string| number, h: string| number, c: string| number) => string,
+        share: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        user: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        addUser: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        close: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
+        ft: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string
+    }
+
+    /**
+     * Hides the tree menu
+     * @param redraw 
+     * @param callback called at the end of the animation
+     */
+    hideTreeMenu(redraw: boolean, callback?: () => void): void;
+
+    /**
+     * Shows tree menu
+     * @param id node id
+     * @param callback called at the end of the animation
+     */
+    showTreeMenu(id: string | number, callback?: () => void): void;
+
+
+    /**
+     * Adds child
+     * @param data child node data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}  
+     */
+    addChildNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Adds child and partner 
+     * @param id id of the existing partner node
+     * @param childData child data 
+     * @param partnerData partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
+     */
+    addChildAndPartnerNodes(id: string | number, childData: object, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
+
+    /**
+     * 
+     * @param id id of the existing partner node
+     * @param childIds ids of the child nodes
+     * @param partnerData partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    addPartnerAndParentNodes(id: string | number, childIds: Array<string | number>, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Adds partner node
+     * 
+     * data.pids partner id should be an existing id
+     * @param data new added partner data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
+     */
+    addPartnerNode(data: object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Adds parrent
+     * @param childId node child id 
+     * @param type mother or father 
+     * @param data new added parent data
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    addParentNode(childId:number | string, type: 'mid' | 'fid', data:object, callback?: () => void, fireEvent?: boolean): void;
+
+
+    /**
+     * Removes node if the node can be removed
+     * @param id node id  to be removed
+     * @param callback called at the end of the animation
+     * @param fireEvent indicates if the update event will be called or not
+     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
+     */
+    removeNode(id:number | string, callback?: () => void, fireEvent?: boolean): void;
+
+    /**
+     * The on() method of the OrgChart class sets up a function that will be called whenever the specified event is delivered to the target.     * 
+     * @category Event Listeners
+     * @param type A case-sensitive string representing the event type to listen for.
+     * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
+     */
+     on(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "ready" | "ripple" | "node-initialized" | "node-layout", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
+
+         /**
+     * Removes an event listener previously registered. The event listener to be removed is identified using a combination of the event type and the event listener function itself. Returns true if success and false if fail.
+     * @param type A string which specifies the type of event for which to remove an event listener
+     * @param listener The event listener function of the event handler to remove from the event target
+     */
+    
+    removeListener(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple" | "node-initialized" | "node-layout", listener?: () => void): boolean;
+
+    /**
+     * Occurs when the node data has been updated, removed or added.
+     *  ```typescript     
+     * var family = new FamilyTree('#tree', {});
+     * family.onUpdateNode((args) => {
+     *  //return false; to cancel the operation
+     * });
+     * ```
+     * @category Event Listeners
+     * @param listener 
+     */
+    onUpdateNode(listener: (this: FamilyTree, args: {
+        addNodesData: Array<object>,
+        updateNodesData: Array<object>,
+        removeNodeId: number | string
+    }) => void): FamilyTree;
+
+    /**
+     * Occurs when node tree menu button is clicked. Use this event to modify the nodes in the tree menu.
+     *  ```typescript     
+     * var family = new FamilyTree('#tree', {});
+     * family.onNodeTreeMenuShow((args) => {  
+     * });
+     * ```
+     * @category Event Listeners
+     * @param listener 
+     */
+    onNodeTreeMenuShow(listener: (this: FamilyTree, args: {
+        nodes: Array<object>,
+        node: object
+    }) => void): FamilyTree;
     nodes: { [key in any]: FamilyTree.node };
     isVisible: boolean;
     visibleNodeIds: Array<number | string>;
@@ -693,7 +843,57 @@ declare class FamilyTree extends FamilyTreeBase {
     config: FamilyTree.options;
     roots: Array<FamilyTree.node>;
 
-    static fileUploadDialog(scallback: (file: any) => void): void;
+    /**
+     * Uploads a file
+     * 
+     * let chart = new OrgChart('#tree', {});
+     * chart.editUI.on('element-btn-click', function (sender, args) {
+     *      OrgChart.fileUploadDialog(function (file) {
+     *          var formData = new FormData();
+     *          formData.append('file', file);
+     *          alert('upload the file');
+     *      })
+     * });
+     * chart.load(nodes)
+     * 
+     */
+    static fileUploadDialog(callback: (file: any) => void): void;
+
+    /**
+     * Export multiple charts or a chart by team
+     * 
+     * let chart1 = new OrgChart('#tree', {});
+     * let chart2 = new OrgChart('#tree', {});
+     * document.getElementById('btn_export').addEventListener('click', function(){
+     *     OrgChart.exportPDFFromCharts([
+     *         { chartInstance: chart1, scale: 'fit', format: 'A4', header: 'OrgChart 1' },
+     *         { chartInstance: chart2, scale: 'fit', format: 'A4', header: 'OrgChart 2' }
+     *     ], "test.pdf");
+     * });
+     * 
+     */
+    static exportPDFFromCharts(optionList: Array<{
+        chartInstance: OrgChart,
+        margin?: Array<number>,
+        padding?: number,
+        landscape?: boolean,
+        type?: "preview" | "nodes",
+        scale?: "fit" | number,
+        format?: "A1" | "A2" | "A3" | "A4" | "A5" | "A4" | "Letter" | "Legal",
+        header?: string,
+        footer?: string,
+        expandChildren?: boolean,
+        min?: boolean,
+        nodeId? : number | string
+    }>, filename?: string, openInNewTab?: boolean, callback?: (arrayBuffer: ArrayBuffer) => void): void;
+
+
+    /**
+     * Check if the screen is mobile
+     * 
+     * let isMobile = OrgChart.isMobile()
+     * 
+     */
     static isMobile(): boolean;
     /**
      * Checks if the used libraris is licnsed or not
@@ -976,6 +1176,24 @@ declare class FamilyTree extends FamilyTreeBase {
 }
 
 declare namespace FamilyTree {    
+    interface node {
+        fid?: string | number,
+                /**
+         * mother id - same fid you provided in the source node, the default value is null if not provided or if node with the same id does not exist
+         */
+        mid?: string | number,
+        /**
+         *  partner parent id, it is the partner parent node id of the partner node, it is the same ppid you provided in the source node, the default value is undefined.
+         */
+    }
+    interface options {
+        nodeTreeMenu?: boolean
+    }
+    interface template {
+        nodeTreeMenuButton: string,
+        nodeTreeMenuCloseButton: string
+    }
+
     /**
      * deprecated
      * @ignore
@@ -2474,180 +2692,4 @@ declare namespace FamilyTree {
     };
 
     var t: any;
-}
-
-declare class FamilyTreeBase {
-
-    static icon: {
-        png: (w: string| number, h: string | number, c: string) => string,
-        pdf: (w: string | number| number, h: string | number, c: string) => string,
-        svg: (w: string| number, h: string| number, c: string | number) => string,
-        csv: (w: string| number, h: string| number, c: string| number) => string,
-        excel: (w: string| number, h: string| number, c: string| number) => string,
-        edit: (w: string| number, h: string| number, c: string| number) => string,
-        details: (w: string| number, h: string| number, c: string| number) => string,
-        remove: (w: string| number, h: string| number, c: string| number) => string,
-        add: (w: string| number, h: string| number, c: string| number) => string,
-        xml: (w: string| number, h: string| number, c: string| number) => string,
-        link: (w: string| number, h: string| number, c: string| number) => string,
-        happy: (w: string| number, h: string| number, c: string| number) => string,
-        sad: (w: string| number, h: string| number, c: string| number) => string,
-        share: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
-        user: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
-        addUser: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
-        close: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string,
-        ft: (w: string| number, h: string| number, c: string| number, x?: string| number, y?: string| number) => string
-    }
-
-    /**
-     * Hides the tree menu
-     * @param redraw 
-     * @param callback called at the end of the animation
-     */
-    hideTreeMenu(redraw: boolean, callback?: () => void): void;
-
-    /**
-     * Shows tree menu
-     * @param id node id
-     * @param callback called at the end of the animation
-     */
-    showTreeMenu(id: string | number, callback?: () => void): void;
-
-
-    /**
-     * Adds child
-     * @param data child node data
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}  
-     */
-    addChildNode(data: object, callback?: () => void, fireEvent?: boolean): void;
-
-
-    /**
-     * Adds child and partner 
-     * @param id id of the existing partner node
-     * @param childData child data 
-     * @param partnerData partner data
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
-     */
-    addChildAndPartnerNodes(id: string | number, childData: object, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
-
-    /**
-     * 
-     * @param id id of the existing partner node
-     * @param childIds ids of the child nodes
-     * @param partnerData partner data
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
-     */
-    addPartnerAndParentNodes(id: string | number, childIds: Array<string | number>, partnerData: object, callback?: () => void, fireEvent?: boolean): void;
-
-
-    /**
-     * Adds partner node
-     * 
-     * data.pids partner id should be an existing id
-     * @param data new added partner data
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...}       
-     */
-    addPartnerNode(data: object, callback?: () => void, fireEvent?: boolean): void;
-
-
-    /**
-     * Adds parrent
-     * @param childId node child id 
-     * @param type mother or father 
-     * @param data new added parent data
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
-     */
-    addParentNode(childId:number | string, type: 'mid' | 'fid', data:object, callback?: () => void, fireEvent?: boolean): void;
-
-
-    /**
-     * Removes node if the node can be removed
-     * @param id node id  to be removed
-     * @param callback called at the end of the animation
-     * @param fireEvent indicates if the update event will be called or not
-     * {@link https://balkan.app/FamilyTreeJS/Docs/CreateProgrammatically | See doc...} 
-     */
-    removeNode(id:number | string, callback?: () => void, fireEvent?: boolean): void;
-
-    /**
-     * The on() method of the OrgChart class sets up a function that will be called whenever the specified event is delivered to the target.     * 
-     * @category Event Listeners
-     * @param type A case-sensitive string representing the event type to listen for.
-     * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
-     */
-     on(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "ready" | "ripple" | "node-initialized" | "node-layout", listener: (sender: FamilyTree, args?: any, args1?: any, args2?: any) => void | boolean): FamilyTree;
-
-         /**
-     * Removes an event listener previously registered. The event listener to be removed is identified using a combination of the event type and the event listener function itself. Returns true if success and false if fail.
-     * @param type A string which specifies the type of event for which to remove an event listener
-     * @param listener The event listener function of the event handler to remove from the event target
-     */
-    
-    removeListener(type: "init" | "node-tree-menu-show" | "field" | "update" | "renderbuttons" | "label" | "render-link" | "redraw" | "expcollclick" | "exportstart" | "exportend" | "click" | "dbclick" | "slink-click" | "clink-click" | "up-click" | "import" | "updated" | "key-down" | "visibility-change" | "renderdefs" | "render" | "prerender" | "screen-reader-text" | "removed" | "ready" | "ripple" | "node-initialized" | "node-layout", listener?: () => void): boolean;
-
-    /**
-     * Occurs when the node data has been updated, removed or added.
-     *  ```typescript     
-     * var family = new FamilyTree('#tree', {});
-     * family.onUpdateNode((args) => {
-     *  //return false; to cancel the operation
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */
-    onUpdateNode(listener: (this: FamilyTree, args: {
-        addNodesData: Array<object>,
-        updateNodesData: Array<object>,
-        removeNodeId: number | string
-    }) => void): FamilyTree;
-
-    /**
-     * Occurs when node tree menu button is clicked. Use this event to modify the nodes in the tree menu.
-     *  ```typescript     
-     * var family = new FamilyTree('#tree', {});
-     * family.onNodeTreeMenuShow((args) => {  
-     * });
-     * ```
-     * @category Event Listeners
-     * @param listener 
-     */
-    onNodeTreeMenuShow(listener: (this: FamilyTree, args: {
-        nodes: Array<object>,
-        node: object
-    }) => void): FamilyTree;
-}
-
-
-
-declare namespace FamilyTree {
-    interface node {
-        fid?: string | number,
-                /**
-         * mother id - same fid you provided in the source node, the default value is null if not provided or if node with the same id does not exist
-         */
-        mid?: string | number,
-        /**
-         *  partner parent id, it is the partner parent node id of the partner node, it is the same ppid you provided in the source node, the default value is undefined.
-         */
-    }
-    interface options {
-        nodeTreeMenu?: boolean
-    }
-    interface template {
-        nodeTreeMenuButton: string,
-        nodeTreeMenuCloseButton: string
-    }
-}
-export default FamilyTree
+}export default FamilyTree
