@@ -1827,6 +1827,7 @@ declare namespace FamilyTree {
          *      mode: "dark"
          * });
          * ```
+         * [How to change mode dynamically](https://code.balkan.app/family-tree-js/mode-toggle)
          */
         mode?: "dark" | "light",
         /**
