@@ -340,7 +340,7 @@ declare class FamilyTree {
      */
     addNode(data: object, callback?: () => void, fireEvent?: boolean): void;  
 
-    setLayout(layout: FamilyTree.layout | number, lcn?: string): void;
+    // setLayout(layout: FamilyTree.layout | number, lcn?: string): void;
     /**
      * Sets orientation.
      * @param orientation  orientation type
@@ -859,33 +859,33 @@ declare class FamilyTree {
      */
     static fileUploadDialog(callback: (file: any) => void): void;
 
-    /**
-     * Export multiple charts or a chart by team
-     * 
-     * let chart1 = new OrgChart('#tree', {});
-     * let chart2 = new OrgChart('#tree', {});
-     * document.getElementById('btn_export').addEventListener('click', function(){
-     *     OrgChart.exportPDFFromCharts([
-     *         { chartInstance: chart1, scale: 'fit', format: 'A4', header: 'OrgChart 1' },
-     *         { chartInstance: chart2, scale: 'fit', format: 'A4', header: 'OrgChart 2' }
-     *     ], "test.pdf");
-     * });
-     * 
-     */
-    static exportPDFFromCharts(optionList: Array<{
-        chartInstance: OrgChart,
-        margin?: Array<number>,
-        padding?: number,
-        landscape?: boolean,
-        type?: "preview" | "nodes",
-        scale?: "fit" | number,
-        format?: "A1" | "A2" | "A3" | "A4" | "A5" | "A4" | "Letter" | "Legal",
-        header?: string,
-        footer?: string,
-        expandChildren?: boolean,
-        min?: boolean,
-        nodeId? : number | string
-    }>, filename?: string, openInNewTab?: boolean, callback?: (arrayBuffer: ArrayBuffer) => void): void;
+    // /**
+    //  * Export multiple charts or a chart by team
+    //  * 
+    //  * let chart1 = new OrgChart('#tree', {});
+    //  * let chart2 = new OrgChart('#tree', {});
+    //  * document.getElementById('btn_export').addEventListener('click', function(){
+    //  *     OrgChart.exportPDFFromCharts([
+    //  *         { chartInstance: chart1, scale: 'fit', format: 'A4', header: 'OrgChart 1' },
+    //  *         { chartInstance: chart2, scale: 'fit', format: 'A4', header: 'OrgChart 2' }
+    //  *     ], "test.pdf");
+    //  * });
+    //  * 
+    //  */
+    // static exportPDFFromCharts(optionList: Array<{
+    //     chartInstance: OrgChart,
+    //     margin?: Array<number>,
+    //     padding?: number,
+    //     landscape?: boolean,
+    //     type?: "preview" | "nodes",
+    //     scale?: "fit" | number,
+    //     format?: "A1" | "A2" | "A3" | "A4" | "A5" | "A4" | "Letter" | "Legal",
+    //     header?: string,
+    //     footer?: string,
+    //     expandChildren?: boolean,
+    //     min?: boolean,
+    //     nodeId? : number | string
+    // }>, filename?: string, openInNewTab?: boolean, callback?: (arrayBuffer: ArrayBuffer) => void): void;
 
 
     /**
@@ -967,14 +967,14 @@ declare class FamilyTree {
     };
     
 
-    static events: {
-        /**
-         * layout event listener is obsolete, use node-layout instead
-         * @param type 
-         * @param listener 
-         */
-        on(type: "layout", listener: (args: any, args1: any, args2: any) => void): void
-    };
+    // static events: {
+    //     /**
+    //      * layout event listener is obsolete, use node-layout instead
+    //      * @param type 
+    //      * @param listener 
+    //      */
+    //     on(type: "layout", listener: (args: any, args1: any, args2: any) => void): void
+    // };
     static state: { clear(stateName: string): void };
 
     static animate(element: Object, attrStart?: Object, attrEnd?: Object, duration?: number, func?: FamilyTree.anim, callback?: Function, tick?: boolean): void;
@@ -1066,18 +1066,18 @@ declare class FamilyTree {
     * Render clinks before nodes, default is false
     */
     static RENDER_CLINKS_BEFORE_NODES: boolean;
-    /**
-    * @ignore
-    */
-    static MIXED_LAYOUT_ALL_NODES: boolean;
-    /**
-    * @ignore
-    */
-    static MIXED_LAYOUT_FOR_NODES_WITH_COLLAPSED_CHILDREN: boolean;
-    /**
-    * Use mixed layout for example tree or treeLeftOffset if number of children is more then specified value
-    */
-    static MIXED_LAYOUT_IF_NUMBER_OF_CHILDREN_IS_MORE_THEN: boolean;
+    // /**
+    // * @ignore
+    // */
+    // static MIXED_LAYOUT_ALL_NODES: boolean;
+    // /**
+    // * @ignore
+    // */
+    // static MIXED_LAYOUT_FOR_NODES_WITH_COLLAPSED_CHILDREN: boolean;
+    // /**
+    // * Use mixed layout for example tree or treeLeftOffset if number of children is more then specified value
+    // */
+    // static MIXED_LAYOUT_IF_NUMBER_OF_CHILDREN_IS_MORE_THEN: boolean;
     /**
     * @ignore
     */
@@ -1600,8 +1600,8 @@ declare namespace FamilyTree {
 
     interface toolbarUI {
         init(obj: FamilyTree, toolbar: toolbar): void;
-        showLayout(): void;
-        hideLayout(): void;
+        // showLayout(): void;
+        // hideLayout(): void;
 
 
         expandAllIcon?: string;
@@ -1610,13 +1610,13 @@ declare namespace FamilyTree {
         closeFullScreenIcon?: string;
         zoomInIcon?: string;
         zoomOutIcon?: string;
-        layoutIcon?: string;
+        // layoutIcon?: string;
     }
 
 
 
     interface toolbar  {
-        layout?: boolean,
+        // layout?: boolean,
         zoom?: boolean,
         fit?: boolean,
         expandAll?: boolean,
@@ -1734,16 +1734,16 @@ declare namespace FamilyTree {
         right_top,
         left_top
     }
-    enum layout {
-        normal,
-        mixed,
-        tree,
-        treeLeftOffset,
-        treeRightOffset,
-        treeLeft,
-        treeRight,
-        grid
-    }
+    // enum layout {
+    //     normal,
+    //     mixed,
+    //     tree,
+    //     treeLeftOffset,
+    //     treeRightOffset,
+    //     treeLeft,
+    //     treeRight,
+    //     grid
+    // }
 
     enum align {
         center,
@@ -2107,7 +2107,7 @@ declare namespace FamilyTree {
                     mixedHierarchyNodesSeparation?: number,
                     subtreeSeparation?: number,
                     siblingSeparation?: number,
-                    layout?: FamilyTree.layout | number,
+                    // layout?: FamilyTree.layout | number,
                     columns?: number,
                     collapse?: {
                         level?: number,
@@ -2403,25 +2403,25 @@ declare namespace FamilyTree {
          * ```
          */
         orientation?: FamilyTree.orientation,
-        /**
-         * Sets the layout algoritm:
-         * - FamilyTree.layout.normal
-         * - FamilyTree.layout.mixed
-         * - FamilyTree.layout.tree
-         * - FamilyTree.layout.treeLeftOffset
-         * - FamilyTree.layout.treeRightOffset
-         * - FamilyTree.layout.treeLeft
-         * - FamilyTree.layout.treeRight
-         * - FamilyTree.layout.grid
-         * 
-         * Default value - *FamilyTree.layout.normal*
-         * ```typescript     
-         * var family = new FamilyTree('#tree', {
-         *   layout: FamilyTree.layout.mixed
-         * });
-         * ```          
-         */
-        layout?: FamilyTree.layout | number,
+        // /**
+        //  * Sets the layout algoritm:
+        //  * - FamilyTree.layout.normal
+        //  * - FamilyTree.layout.mixed
+        //  * - FamilyTree.layout.tree
+        //  * - FamilyTree.layout.treeLeftOffset
+        //  * - FamilyTree.layout.treeRightOffset
+        //  * - FamilyTree.layout.treeLeft
+        //  * - FamilyTree.layout.treeRight
+        //  * - FamilyTree.layout.grid
+        //  * 
+        //  * Default value - *FamilyTree.layout.normal*
+        //  * ```typescript     
+        //  * var family = new FamilyTree('#tree', {
+        //  *   layout: FamilyTree.layout.mixed
+        //  * });
+        //  * ```          
+        //  */
+        // layout?: FamilyTree.layout | number,
         /**
          * Sets the maximum number of columns in grid layout, it has to be even nymber or 'dynamic' string
          * The default id 'dynamic', that means that the maximum colomn numbers are dinamicly calculated 
