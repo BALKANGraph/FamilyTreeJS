@@ -105,7 +105,7 @@ declare class FamilyTree {
     removeNode(id:number | string, callback?: () => void, fireEvent?: boolean): void;
 
     /**
-     * The on() method of the OrgChart class sets up a function that will be called whenever the specified event is delivered to the target.     * 
+     * The on() method of the FamilyTree class sets up a function that will be called whenever the specified event is delivered to the target.     * 
      * @category Event Listeners
      * @param type A case-sensitive string representing the event type to listen for.
      * @param listener The object that receives a notification when an event of the specified type occurs. This must be a JavaScript function. 
@@ -317,6 +317,12 @@ declare class FamilyTree {
      * @param callback called when the animation completes
      */
     fit(callback?: () => void): void;
+
+        /**
+     * Fits the content to the visible area if ouside.
+     * @param callback called when the animation completes
+     */
+    fitIfOutside(callback?: () => void): void;
     /**
      * Toggles full screen mode.
      */
@@ -846,9 +852,9 @@ declare class FamilyTree {
     /**
      * Uploads a file
      * 
-     * let chart = new OrgChart('#tree', {});
+     * let chart = new FamilyTree('#tree', {});
      * chart.editUI.on('element-btn-click', function (sender, args) {
-     *      OrgChart.fileUploadDialog(function (file) {
+     *      FamilyTree.fileUploadDialog(function (file) {
      *          var formData = new FormData();
      *          formData.append('file', file);
      *          alert('upload the file');
@@ -862,18 +868,18 @@ declare class FamilyTree {
     /**
      * Export multiple charts or a chart by team
      * 
-     * let chart1 = new OrgChart('#tree', {});
-     * let chart2 = new OrgChart('#tree', {});
+     * let chart1 = new FamilyTree('#tree', {});
+     * let chart2 = new FamilyTree('#tree', {});
      * document.getElementById('btn_export').addEventListener('click', function(){
-     *     OrgChart.exportPDFFromCharts([
-     *         { chartInstance: chart1, scale: 'fit', format: 'A4', header: 'OrgChart 1' },
-     *         { chartInstance: chart2, scale: 'fit', format: 'A4', header: 'OrgChart 2' }
+     *     FamilyTree.exportPDFFromCharts([
+     *         { chartInstance: chart1, scale: 'fit', format: 'A4', header: 'FamilyTree 1' },
+     *         { chartInstance: chart2, scale: 'fit', format: 'A4', header: 'FamilyTree 2' }
      *     ], "test.pdf");
      * });
      * 
      */
     static exportPDFFromCharts(optionList: Array<{
-        chartInstance: OrgChart,
+        chartInstance: FamilyTree,
         margin?: Array<number>,
         padding?: number,
         landscape?: boolean,
@@ -891,7 +897,7 @@ declare class FamilyTree {
     /**
      * Check if the screen is mobile
      * 
-     * let isMobile = OrgChart.isMobile()
+     * let isMobile = FamilyTree.isMobile()
      * 
      */
     static isMobile(): boolean;
@@ -1772,7 +1778,8 @@ declare namespace FamilyTree {
     enum match {
         height,
         width,
-        boundary
+        boundary,
+        boundaryIfOutside
     }
 
     enum movable {
